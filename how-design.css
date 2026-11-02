@@ -1,0 +1,44 @@
+.how-hero{background:var(--cream);color:var(--ink);background-image:radial-gradient(rgba(6,38,58,.08) 1px,transparent 1.3px);background-size:22px 22px;padding-block:32px 70px}
+.how-hero .crumbs{color:var(--muted)}
+.how-hero .p-title{color:var(--ink);font-size:clamp(3.4rem,7.4vw,7rem);transform:rotate(-1.5deg);transform-origin:left center}
+.how-hero .eyebrow{color:var(--rust-ink)}
+.how-hero .lead{color:var(--muted);line-height:1.75}
+.how-hero .link{color:var(--ink)}
+.how-hero .show-ghost{color:transparent;-webkit-text-stroke:1px rgba(6,38,58,.08);opacity:1}
+.how-hero .hh-dial{border:1px dashed var(--rust);background:radial-gradient(circle,#faf5ed 0 52%,transparent 53%)}
+.how-hero .hh-dial::before{border-color:rgba(6,38,58,.16);inset:19%}
+.how-hero .hh-dial li{background:var(--ink);color:var(--cream);box-shadow:0 12px 25px -13px rgba(6,38,58,.5)}
+.how-hero .hh-dial li::before{color:var(--rust-lite)}
+.journey{background:var(--ink);color:var(--cream)}
+.journey .eyebrow{color:var(--rust-lite)}
+.journey .sec-head .lead{color:rgba(244,235,221,.76)}
+.journey-list::before{background:repeating-linear-gradient(var(--rust-lite) 0 7px,transparent 7px 13px);opacity:.75}
+.journey .jcard{background:var(--paper);color:var(--ink);border-radius:2px;position:relative}
+.journey .jcard::after{content:"";position:absolute;inset:7px;border:1px dashed rgba(201,74,44,.3);pointer-events:none}
+.journey .jn{background:var(--cream);border-color:var(--cream)}
+.journey .jstep.on .jn{background:var(--rust);border-color:var(--rust)}
+@media(max-width:860px){.how-hero{padding-bottom:48px}.how-hero .hh-grid{gap:12px}.how-hero .hh-dial{margin:50px auto 55px}}
+.how-hero .show-ghost{-webkit-text-stroke:1.5px rgba(6,38,58,.16);top:55%;font-size:clamp(5rem,14vw,12rem);letter-spacing:-.025em}
+.process-divider{background:var(--ink);color:var(--cream);padding:17px 0}
+.process-divider .wrap{display:flex;justify-content:space-between;gap:15px;font:800 10px/1.5 var(--body);letter-spacing:.12em}
+.process-divider i{font-style:normal;color:var(--rust-lite);padding:0 10px}
+#overview .promises{grid-template-columns:minmax(0,.8fr) minmax(0,.8fr) minmax(0,1.4fr);align-items:stretch}
+#overview .promise{padding:18px 20px;gap:6px}
+#overview .promise b{font-size:clamp(2rem,3vw,2.8rem)}
+#overview .promise span{font-size:13px;line-height:1.5}
+#overview .promise.sign{grid-template-columns:minmax(0,1fr) 140px;gap:6px 12px;align-content:start}
+#overview .promise.sign .sig{width:140px;max-width:100%;min-width:0}
+.journey-list::before{display:none}
+.journey .jstep{position:relative}
+.journey .jstep:not(:last-child)::before{content:"";position:absolute;left:31px;top:32px;bottom:-54px;width:2px;background:repeating-linear-gradient(var(--rust-lite) 0 7px,transparent 7px 13px);opacity:.75}
+@media(max-width:959px){#overview .promises{grid-template-columns:1fr 1fr}#overview .promise.sign{grid-column:1 / -1}}
+@media(max-width:640px){#overview .promises{grid-template-columns:1fr}#overview .promise.sign{grid-column:auto;grid-template-columns:minmax(0,1fr) 110px}#overview .promise.sign .sig{width:110px;grid-column:2;grid-row:1 / span 3;margin:0}.process-divider .wrap{flex-wrap:wrap;font-size:9px}.process-divider i{padding:0 4px}}
+@media(max-width:560px){.journey .jstep:not(:last-child)::before{left:23px;top:24px;bottom:-46px}}
+/* Keep the whole background word within the text side of the hero. */
+.how-hero .show-ghost{left:29%;top:24%;font-size:clamp(4rem,10vw,9rem)}
+@media(max-width:860px){.how-hero .show-ghost{left:50%;top:12%;font-size:clamp(4rem,13vw,7rem)}}
+/* The full word spans the hero as a quiet oversized outline. */
+.how-hero .show-ghost{left:50%;top:16%;font-size:clamp(6rem,17vw,15rem);letter-spacing:-.025em}
+@media(max-width:860px){.how-hero .show-ghost{left:50%;top:11%;font-size:clamp(5rem,17vw,12rem)}}
+.how-hero .show-ghost{top:49%}
+@media(max-width:860px){.how-hero .show-ghost{top:40%}}

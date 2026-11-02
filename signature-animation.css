@@ -1,0 +1,15 @@
+.promise.sign .sig{display:block;width:min(190px,100%);height:auto;align-self:center}
+.promise.sign .sig-ink{fill:none;stroke:#f4ebdd;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:420;stroke-dashoffset:0;transition:stroke-dashoffset 1.4s cubic-bezier(.6,.1,.3,1)}
+.promise.sign .sig-line{stroke:rgba(244,235,221,.5);stroke-width:1.5;fill:none}
+.promise.sign .sig-x{stroke:#ee8b6b;stroke-width:2;fill:none;stroke-linecap:round}
+.promise.sign .sig text{fill:rgba(244,235,221,.7);font:800 8.5px var(--body);letter-spacing:.16em}
+.promise.sign.signature-ready .sig-ink{stroke-dashoffset:420}
+.promise.sign.signature-ready.signature-visible .sig-ink{stroke-dashoffset:0}
+/* A constrained signature column leaves enough room for the promise text. */
+.promises .promise.sign{grid-template-columns:minmax(0,1fr) 140px;column-gap:12px}
+.promises .promise.sign .sig{width:140px;max-width:100%;min-width:0;grid-column:2;grid-row:1 / span 3;margin:0}
+.promises .promise{padding:18px 20px;gap:6px}
+.promises .promise b{font-size:clamp(2rem,3vw,2.8rem)}
+.promises .promise span{font-size:13px;line-height:1.5}
+@media(max-width:640px){.promises .promise.sign{grid-template-columns:minmax(0,1fr) 100px}.promises .promise.sign .sig{width:100px;grid-column:2;grid-row:1 / span 3;margin:0}}
+@media(max-width:640px){.promise.sign .sig{grid-column:1;grid-row:auto;margin-top:12px}}
