@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Custom Golf Wear, Layers and Accessories | The Thread Dealers</title>
-<meta name="description" content="Custom apparel programs from The Thread Dealers: business and golf wear, premium layers, accessories and fully custom product development for brands, clubs and companies.">
+<meta name="description" content="Custom apparel programs from The Thread Dealers: business and golf wear, premium layers, accessories like metal water bottles and tote bags, and fully custom product development for brands, clubs and companies.">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://thethreaddealers.com/custom-programs.html">
 <meta name="theme-color" content="#031A2B">
 <meta property="og:type" content="website"><meta property="og:site_name" content="The Thread Dealers"><meta property="og:locale" content="en_CA">
-<meta property="og:title" content="Custom Golf Wear, Layers and Accessories | The Thread Dealers"><meta property="og:description" content="Custom apparel programs from The Thread Dealers: business and golf wear, premium layers, accessories and fully custom product development for brands, clubs and companies."><meta property="og:url" content="https://thethreaddealers.com/custom-programs.html">
-<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Custom Golf Wear, Layers and Accessories | The Thread Dealers"><meta name="twitter:description" content="Custom apparel programs from The Thread Dealers: business and golf wear, premium layers, accessories and fully custom product development for brands, clubs and companies.">
+<meta property="og:title" content="Custom Golf Wear, Layers and Accessories | The Thread Dealers"><meta property="og:description" content="Custom apparel programs from The Thread Dealers: business and golf wear, premium layers, accessories like metal water bottles and tote bags, and fully custom product development for brands, clubs and companies."><meta property="og:url" content="https://thethreaddealers.com/custom-programs.html">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Custom Golf Wear, Layers and Accessories | The Thread Dealers"><meta name="twitter:description" content="Custom apparel programs from The Thread Dealers: business and golf wear, premium layers, accessories like metal water bottles and tote bags, and fully custom product development for brands, clubs and companies.">
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://thethreaddealers.com/"}, {"@type": "ListItem", "position": 2, "name": "Custom Programs", "item": "https://thethreaddealers.com/custom-programs.html"}]}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap">
@@ -739,6 +739,37 @@ h1,h2,h3{text-wrap:balance}
 /* keep the orbit inside the screen */
 .hh-dial{width:min(340px,calc(100vw - 2 * var(--gl) - 110px));margin:56px auto}
 @media (max-width:860px){.hh-dial{width:min(280px,calc(100vw - 2 * var(--gl) - 96px))}}
+
+/* ===== Custom Programs page ===== */
+.pg-hero .p-title{font-size:clamp(3.2rem,9vw,8rem)}
+.pg-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.pg-chip{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:var(--cream);border:1.5px solid var(--cream-line);border-radius:40px;padding:10px 16px 10px 10px;font-weight:700;font-size:14.5px;transition:background .2s,border-color .2s,transform .3s}
+.pg-chip b{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--rust);font:800 .85rem var(--display)}
+.pg-chip:hover{background:rgba(244,235,221,.08);border-color:var(--rust);transform:translateY(-2px)}
+.pg-list .wrap{display:grid;gap:clamp(40px,6vw,80px)}
+.pg{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(24px,5vw,72px);align-items:center;scroll-margin-top:100px}
+.pg.rev .pg-art{order:2}
+.pg-art{position:relative;aspect-ratio:1;max-width:440px;width:100%;justify-self:center;border-radius:50%;background:var(--stone);display:grid;place-items:center;transition:transform .6s cubic-bezier(.2,.9,.25,1.15)}
+.pg-art::before{content:"";position:absolute;inset:-14px;border-radius:50%;border:2px dashed rgba(201,74,44,.55);animation:spin 40s linear infinite}
+.pg-art svg{width:62%;height:auto;overflow:visible}
+.pg-art svg *{fill:var(--paper);stroke:var(--ink);stroke-width:2.4;stroke-linejoin:round;stroke-linecap:round}
+.pg-art svg path:not(:first-child){fill:none}
+.pg-art svg path{stroke-dasharray:600;stroke-dashoffset:600;transition:stroke-dashoffset 1.6s cubic-bezier(.5,0,.2,1) .2s}
+.pg.on .pg-art svg path{stroke-dashoffset:0}
+.pg-num{position:absolute;left:4%;top:4%;font:900 clamp(3.5rem,7vw,6rem)/.8 var(--display);color:transparent;-webkit-text-stroke:2px var(--rust)}
+.pg-stamp{position:absolute;right:-2%;bottom:12%;transform:rotate(-10deg) scale(1.8);opacity:0;border:3px solid var(--rust);color:var(--rust);background:var(--cream);font:900 1.1rem var(--display);letter-spacing:.08em;text-transform:uppercase;padding:6px 12px;transition:transform .45s cubic-bezier(.5,0,.8,.3) 1s,opacity .2s 1s}
+.pg.on .pg-stamp{opacity:1;transform:rotate(-10deg) scale(1)}
+.pg:hover .pg-art{transform:scale(1.03) rotate(-2deg)}
+.pg-copy h2{font:900 clamp(2.4rem,4.6vw,4.2rem)/.88 var(--display);text-transform:uppercase;margin:0}
+.pg-sub{font-weight:800;color:var(--rust-ink);margin:14px 0 0}
+.pg-d{color:var(--muted);font-size:1.05rem;max-width:46ch;margin:10px 0 0}
+.pg-tags{list-style:none;margin:20px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.pg-tags li{font-size:13px;font-weight:800;letter-spacing:.04em;background:var(--paper);border:1.5px solid var(--line);border-radius:3px;padding:8px 12px;transition:border-color .2s,transform .2s}
+.pg-tags li:hover{border-color:var(--rust);transform:translateY(-2px)}
+.pg-flag{display:inline-block;margin-top:16px;background:var(--rust);color:var(--cream);font-size:11.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:6px 10px;border-radius:2px}
+@media (max-width:860px){.pg,.pg.rev{grid-template-columns:1fr}.pg.rev .pg-art{order:0}.pg-art{max-width:300px}}
+@media (max-width:560px){.pg-chip{font-size:13px}.pg-art{max-width:240px}.pg-stamp{font-size:.9rem}}
+@media (prefers-reduced-motion:reduce){.pg-art::before{animation:none}.pg-art svg path{stroke-dashoffset:0}.pg-stamp{opacity:1;transform:rotate(-10deg)}}
 </style>
 </head>
 <body>
@@ -752,37 +783,47 @@ h1,h2,h3{text-wrap:balance}
   </div>
 </header>
 <main>
-  <section class="p-hero dotgrid">
+  <section class="show pg-hero">
+    <div class="show-ghost" aria-hidden="true">Programs</div>
     <div class="wrap">
       <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span><span aria-current="page">Custom Programs</span></nav>
-      <p class="eyebrow">Beyond the Core</p>
-      <h1 class="p-title">Custom<br>programs</h1>
-      <p class="lead">Ideas beyond the Core Collection. These are in sampling now, so we scope each one with you before we quote it.</p>
-      <ul class="chips"><li class="tag sampling">In sampling</li><li>Scoped with you</li><li>Sampled before we sell</li></ul>
-    </div>
-  </section>
-  <section class="sec">
-    <div class="wrap">
-      <div class="sec-head"><div><p class="eyebrow">The programs</p><h2 class="h2">What we are building</h2></div></div>
-      <div class="progs"><article class="prog"><div class="k"><span>In sampling</span></div><h3>Business &amp; Golf Wear</h3><p>Polos and clubhouse ready pieces for pro shops, offices and teams that meet clients.</p><ul><li>Polos</li><li>Clubhouse pieces</li><li>Office wear</li></ul></article><article class="prog"><div class="k"><span>In sampling</span></div><h3>Premium Layers</h3><p>Crewnecks, quarter zips and lightweight layers for cooler days and smarter settings.</p><ul><li>Crewnecks</li><li>Quarter zips</li><li>Lightweight layers</li></ul></article><article class="prog"><div class="k"><span>In sampling</span><span class="addon">Add on</span></div><h3>Accessories</h3><p>Extras that round up an order and keep the brand in use every day. Metal water bottles and tote bags make great client and staff gifts.</p><ul><li>Metal water bottles</li><li>Tote bags</li><li>Beanies</li><li>Aprons</li><li>Koozies</li><li>Grip socks for studios</li></ul></article><article class="prog"><div class="k"><span>In sampling</span></div><h3>Custom Development</h3><p>Our factories already cover it. Bring us your idea and we start sampling and building it with you.</p><ul><li>New product ideas</li><li>Sampling with you</li><li>Fully custom pieces</li></ul></article></div>
-    </div>
-  </section>
-  <section class="sec alt">
-    <div class="wrap">
-      <div class="sec-head"><div><p class="eyebrow">The approach</p><h2 class="h2">How a custom program runs</h2></div></div>
-      <ol class="mini-steps">
-        <li><h3>Scope it together</h3><p>We talk through what it is for, who uses it and the quality you expect.</p></li>
-        <li><h3>Sample and test</h3><p>We order and test samples before anything new is sold, so the quality claim holds up.</p></li>
-        <li><h3>Approve and sign</h3><p>You approve the sample and the details, then sign the order confirmation.</p></li>
-        <li><h3>Produce and deliver</h3><p>Production runs once you have signed. We keep you updated until it arrives.</p></li>
-      </ol>
-      <div class="promises">
-        <div class="promise"><b>50 pieces</b><span>Minimum per item, split across sizes.</span></div>
-        <div class="promise"><b>Add ons</b><span>Accessories can join any Core Collection order.</span></div>
-        <div class="promise sign"><span class="tag">Our promise</span><b>Signed before we start</b><span>Nothing goes into production until you sign the order confirmation.</span></div>
+      <div class="rv">
+        <p class="eyebrow">Beyond the Core Collection</p>
+        <h1 class="p-title">Custom<br><span style="color:var(--rust)">programs.</span></h1>
+        <p class="lead">Golf wear, premium layers, accessories and fully custom pieces. Our factories are ready for all of it. We sample each one with you before a full run.</p>
+        <div class="pg-chips"><a href="#golf" class="pg-chip"><b>01</b>Business &amp; Golf Wear</a><a href="#layer" class="pg-chip"><b>02</b>Premium Layers</a><a href="#acc" class="pg-chip"><b>03</b>Accessories</a><a href="#dev" class="pg-chip"><b>04</b>Custom Development</a></div>
       </div>
     </div>
   </section>
+  <section class="sec pg-list">
+    <div class="wrap"><article class="pg rv" id="golf"><div class="pg-art"><span class="pg-num">01</span><svg viewBox="0 0 140 140" aria-hidden="true"><path d="M40 30 L60 22 Q70 34 80 22 L100 30 L114 54 L100 60 L96 52 L96 118 L44 118 L44 52 L40 60 L26 54 Z"/><path d="M60 22 L70 46 L80 22 M70 46 V68"/><path d="M68 56 h4 M68 64 h4"/></svg><span class="pg-stamp">In sampling</span></div><div class="pg-copy"><p class="eyebrow">Program 01</p><h2>Business &amp; Golf Wear</h2><p class="pg-sub">For pro shops, offices and teams that meet clients.</p><p class="pg-d">Polos and clubhouse ready pieces that look sharp on the course and in the boardroom.</p><ul class="pg-tags"><li>Polos</li><li>Clubhouse pieces</li><li>Office wear</li></ul></div></article><article class="pg rv rev" id="layer"><div class="pg-art"><span class="pg-num">02</span><svg viewBox="0 0 140 140" aria-hidden="true"><path d="M42 32 L60 24 L70 36 L80 24 L98 32 L116 104 L100 108 L94 64 L94 120 L46 120 L46 64 L40 108 L24 104 Z"/><path d="M60 24 L70 52 L80 24 M70 52 V120"/><path d="M66 60 h8"/></svg><span class="pg-stamp">In sampling</span></div><div class="pg-copy"><p class="eyebrow">Program 02</p><h2>Premium Layers</h2><p class="pg-sub">For cooler days and smarter settings.</p><p class="pg-d">Crewnecks, quarter zips and lightweight layers that sit between a tee and a hoodie.</p><ul class="pg-tags"><li>Crewnecks</li><li>Quarter zips</li><li>Lightweight layers</li></ul></div></article><article class="pg rv" id="acc"><div class="pg-art"><span class="pg-num">03</span><svg viewBox="0 0 140 140" aria-hidden="true"><path d="M38 44 h28 v74 h-28 z M42 34 h20 v10 h-20 z"/><path d="M38 64 h28 M38 98 h28"/><path d="M78 54 h40 l-6 64 h-28 z"/><path d="M88 54 q10 -22 20 0"/></svg><span class="pg-stamp">In sampling</span></div><div class="pg-copy"><p class="eyebrow">Program 03 · Add on</p><h2>Accessories</h2><p class="pg-sub">The add on that rounds up any order.</p><p class="pg-d">Extras that keep your brand in use every day. Metal water bottles and tote bags make great client and staff gifts.</p><ul class="pg-tags"><li>Metal water bottles</li><li>Tote bags</li><li>Beanies</li><li>Aprons</li><li>Koozies</li><li>Grip socks for studios</li></ul><span class="pg-flag">Add on</span></div></article><article class="pg rv rev" id="dev"><div class="pg-art"><span class="pg-num">04</span><svg viewBox="0 0 140 140" aria-hidden="true"><path d="M70 20 a28 28 0 0 1 16 51 v13 h-32 v-13 a28 28 0 0 1 16 -51 z"/><path d="M58 92 h24 M60 100 h20 M64 108 h12"/><path d="M70 40 v22 M60 52 h20"/></svg><span class="pg-stamp">In sampling</span></div><div class="pg-copy"><p class="eyebrow">Program 04</p><h2>Custom Development</h2><p class="pg-sub">Your idea, built with you.</p><p class="pg-d">Our factories already cover it. Bring us your idea and we start sampling and building it with you.</p><ul class="pg-tags"><li>New product ideas</li><li>Sampling with you</li><li>Fully custom pieces</li></ul></div></article></div>
+  </section>
+  <section class="sec alt journey">
+    <div class="wrap">
+      <div class="sec-head rv"><div><p class="eyebrow">The approach</p><h2 class="h2">How a custom program runs</h2></div><p class="lead" style="margin:0;max-width:38ch">Same promise as the Core Collection, with a sample built in.</p></div>
+      <ol class="journey-list"><li class="jstep rv"><span class="jn">1</span><div class="jcard"><h3>Scope it together</h3><p class="pg-d" style="margin:0">We talk through what it is for, who uses it and the quality you expect.</p></div></li><li class="jstep rv"><span class="jn">2</span><div class="jcard"><h3>Sample and test</h3><p class="pg-d" style="margin:0">We sample and test every new piece before anything is sold, so the quality holds up.</p></div></li><li class="jstep rv"><span class="jn">3</span><div class="jcard"><h3>Approve and sign</h3><p class="pg-d" style="margin:0">You approve the sample and details, then sign the order confirmation.</p></div></li><li class="jstep rv"><span class="jn">4</span><div class="jcard"><h3>Produce and deliver</h3><p class="pg-d" style="margin:0">Production starts once you sign. We keep you updated until it arrives.</p></div></li></ol>
+      <div class="how" style="margin-top:48px"><div class="promises" id="promises">
+          <div class="promise"><b>50 pieces</b><span>Minimum per item. Split the 50 across whatever sizes your team needs.</span></div>
+          <div class="promise"><b>Sampled first</b><span>Every new piece is sampled and tested with you before a full run.</span></div>
+          <div class="promise sign">
+            <span class="tag">Our promise</span>
+            <b>Signed before we start</b>
+            <span>Nothing goes into production until you sign the order confirmation. What we agree on is exactly what you get.</span>
+            <svg class="sig" viewBox="0 0 220 64" aria-hidden="true"><path class="sig-ink" d="M30 40 C38 14 50 12 47 34 C45 48 58 22 66 25 C74 28 67 42 78 38 C90 33 93 18 102 22 C110 26 100 44 113 40 C126 35 130 27 142 29 C152 31 148 41 160 37 C172 33 178 27 194 31"/><path class="sig-x" d="M6 34 l9 9 m0 -9 l-9 9"/><path class="sig-line" d="M4 50 H216"/><text x="4" y="62">CLIENT SIGNATURE</text></svg>
+          </div>
+        </div></div>
+    </div>
+  </section>
+<script>
+(function(){
+  var pr=document.getElementById('promises');
+  if('IntersectionObserver' in window){
+    document.documentElement.classList.add('sig-armed');
+    var o2=new IntersectionObserver(function(e){if(e[0].isIntersecting){pr.classList.add('lit');o2.disconnect()}},{rootMargin:'-38% 0px -38% 0px'});o2.observe(pr.querySelector('.promise.sign'));
+    var o3=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting)x.target.classList.add('on')})},{rootMargin:'0px 0px -30% 0px'});[].forEach.call(document.querySelectorAll('.jstep,.pg'),function(j){o3.observe(j)});
+  }else pr.classList.add('lit');
+})();
+</script>
   <section class="cta-band">
     <div class="wrap cta-grid">
       <div>
