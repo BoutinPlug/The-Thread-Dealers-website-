@@ -1,0 +1,133 @@
+/* Program showroom. Page-specific refinements to the shared Thread Dealers system. */
+.program-hero-grid{position:relative;isolation:isolate}
+.program-hero-grid::before{content:"CUSTOM";position:absolute;z-index:-1;left:8%;bottom:3%;font:900 clamp(7rem,20vw,18rem)/.8 var(--display);letter-spacing:-.03em;color:transparent;-webkit-text-stroke:1.4px rgba(6,38,58,.14);white-space:nowrap;pointer-events:none}
+.pg-hero{background-color:var(--cream);color:var(--ink);background-image:radial-gradient(rgba(6,38,58,.12) 1px,transparent 1.3px);padding-bottom:0}
+.pg-hero .crumbs{color:var(--muted);margin-bottom:48px}
+.pg-hero .eyebrow{color:var(--rust-ink)}
+.program-hero-grid{display:grid;grid-template-columns:minmax(0,1.8fr) minmax(0,1fr);gap:60px;align-items:center}
+.pg-hero .p-title{color:var(--ink);font-size:clamp(5rem,11.8vw,10.5rem);line-height:.8;letter-spacing:-.025em;transform:rotate(-3deg);transform-origin:left center}
+.pg-hero .p-title span{color:var(--ink)}
+.hero-thread{width:108%;max-width:none;height:auto;margin:0 0 4px -4%;color:var(--rust);position:relative;pointer-events:none}
+.hero-note{padding:24px 0 24px 28px;border-left:1px solid var(--line)}
+.note-index{display:block;font:900 clamp(2rem,3.4vw,3.2rem)/.92 var(--display);text-transform:uppercase}
+.hero-note p{font-size:15px;color:var(--muted);line-height:1.7;margin:22px 0}
+.hero-note .note-small{font-size:13px;max-width:30ch}
+.pg-hero .link{color:var(--ink);font-size:11px}
+.program-index{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:38px;border-top:1px solid var(--ink)}
+.program-index a{position:relative;padding:24px 24px 28px 0;text-decoration:none;transition:color .25s,background .25s}
+.program-index a+a{border-left:1px solid var(--line);padding-left:24px}
+.program-index span{display:block;font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.program-index strong{display:block;font:800 clamp(1.4rem,2.6vw,2.2rem)/.95 var(--display);text-transform:uppercase;margin-top:16px}
+.program-index b{position:absolute;right:17px;bottom:25px;font-size:25px;font-weight:400;color:var(--rust);transition:transform .25s}
+.program-index a:hover{color:var(--rust-ink);background:rgba(255,255,255,.25)}
+.program-index a:hover b{transform:translate(3px,3px)}
+.program-strip{background:var(--ink);color:var(--cream);padding-block:18px}
+.program-strip .wrap{display:flex;justify-content:space-between;gap:16px;font:800 10px/1.5 var(--body);letter-spacing:.1em;text-transform:uppercase}
+.program-strip i{color:var(--rust-lite);font-style:normal;margin:0 14px}
+.pg-list{padding-block:68px 100px;background:var(--cream-2)}
+.pg-list .wrap{gap:85px}
+.pg{position:relative;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:35px 80px;scroll-margin-top:100px}
+.program-caption{grid-column:1/-1;order:-1;display:flex;justify-content:space-between;gap:20px;padding-bottom:15px;border-bottom:1px solid var(--line);font:800 10px/1.5 var(--body);letter-spacing:.15em;text-transform:uppercase}
+.program-caption span:first-child{color:var(--rust-ink)}
+.program-caption span:last-child{font-size:9px;color:var(--muted)}
+.pg-copy{background-color:var(--paper);min-height:0;margin-top:0;padding:70px 38px 34px;transform:rotate(1.3deg);transform-origin:42px 42px}
+.pg.rev .pg-copy{transform:rotate(-1.3deg)}
+.pg-copy h2{font-size:clamp(2.6rem,4.6vw,4.2rem)}
+.pg-copy .eyebrow{font-size:10px;margin-bottom:18px}
+.pg-copy .pg-sub{font-size:14px;line-height:1.6}
+.pg-copy .pg-d{font-size:14px;line-height:1.8}
+.pg-tags{gap:10px;margin-top:22px}
+.pg-tags li{font-size:13px}
+.pg-tags li::before{width:23px;height:23px}
+.program-cta{display:flex;justify-content:space-between;gap:20px;margin-top:26px;padding-top:17px;border-top:1px solid var(--line);font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;text-decoration:none}
+.program-cta span{color:var(--rust);font-size:21px;line-height:1}
+.program-cta:hover{color:var(--rust-ink)}
+.pg-art{max-width:365px;background:radial-gradient(circle at 45% 32%,var(--paper),#DACDB8);box-shadow:0 28px 34px -23px rgba(3,26,43,.4);margin-block:35px}
+.pg:nth-child(n) .pg-art{background:radial-gradient(circle at 45% 32%,var(--paper),#DACDB8)}
+.pg-art::before{inset:-25px;border-width:1px;opacity:.8}
+.pg-art::after{content:"THE THREAD DEALERS / MADE FOR YOU";position:absolute;bottom:-53px;font:800 8px/1.5 var(--body);letter-spacing:.2em;color:var(--muted);text-align:center}
+.pg-art svg{width:64%;filter:drop-shadow(3px 9px 2px rgba(6,38,58,.08))}
+.pg-art svg *{stroke-width:1.3}
+.pg-art .program-mockup{position:relative;z-index:1;display:block;width:94%;height:auto;object-fit:contain;filter:drop-shadow(3px 12px 8px rgba(6,38,58,.13));pointer-events:none}
+.pg-num{top:-28px;left:-14px;font-size:5.7rem;-webkit-text-stroke-width:1px}
+/* Each object has its own hover target. Hovering the row never moves its sibling. */
+.pg:hover .pg-art,.pg.rev:hover .pg-art{transform:none}
+.pg:hover .pg-copy{transform:rotate(1.3deg);box-shadow:none}
+.pg.rev:hover .pg-copy{transform:rotate(-1.3deg);box-shadow:none}
+@media (hover:hover) and (prefers-reduced-motion:no-preference){
+  .pg .pg-art:hover,.pg.rev .pg-art:hover{transform:translateY(-10px) rotate(-3deg) scale(1.025)}
+  .pg .pg-copy:hover,.pg.rev .pg-copy:hover,.pg .pg-copy:focus-within{transform:rotate(0deg) translateY(-5px)}
+}
+.journey{background:var(--ink)!important;color:var(--cream)}
+.journey .eyebrow{color:var(--rust-lite)}
+.journey .sec-head{margin-bottom:45px}
+.journey .sec-head .lead{color:rgba(244,235,221,.7)}
+.journey-list{grid-template-columns:repeat(4,minmax(0,1fr));gap:28px}
+.journey-list::before{left:0;right:0;top:26px;bottom:auto;height:1px;width:auto;background:repeating-linear-gradient(90deg,var(--rust-lite) 0 6px,transparent 6px 12px)}
+.jstep{display:block}
+.jn,.jstep.on .jn{width:54px;height:54px;background:var(--ink);color:var(--rust-lite);border:1px solid var(--rust-lite);transform:none;box-shadow:none;margin-bottom:25px}
+.jcard{padding:0;background:none;border:0;box-shadow:none}
+.jcard:hover{transform:none;box-shadow:none}
+.jcard h3{font-size:1.7rem}
+.jcard .pg-d{color:rgba(244,235,221,.72);font-size:13px}
+.journey .promises{margin-top:60px}
+.journey .promise{color:var(--ink)}
+.journey .promise.sign{color:var(--cream)}
+.journey .promises{gap:18px}
+.journey .promise.sign{grid-template-columns:1fr}
+.journey .promise.sign .sig{grid-column:1;grid-row:auto;width:170px;margin-top:12px}
+@media(max-width:860px){
+  .program-hero-grid{grid-template-columns:1fr;gap:0}
+  .pg-hero .p-title{font-size:clamp(5rem,17vw,9rem)}
+  .hero-thread{width:100%}
+  .hero-note{border-left:0;border-top:1px solid var(--line);padding:24px 0;display:grid;grid-template-columns:1fr 1.3fr;gap:12px 30px}
+  .hero-note p{margin:0}.hero-note .note-small{grid-column:2}.hero-note .link{grid-column:2;justify-self:start}
+  .program-index{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:16px}
+  .program-index a:nth-child(3){border-left:0;padding-left:0}.program-index a:nth-child(n+3){border-top:1px solid var(--line)}
+  .program-index strong{font-size:2rem}
+  .pg,.pg.rev{grid-template-columns:1fr;gap:28px}
+  .pg-art{max-width:310px}.pg-copy,.pg.rev .pg-copy{justify-self:center;margin-top:26px;max-width:560px}
+  .program-caption span:last-child{display:none}
+  .journey-list{grid-template-columns:1fr 1fr;gap:35px}.journey-list::before{display:none}
+  .program-strip .wrap{flex-wrap:wrap;justify-content:center;text-align:center}
+}
+@media(max-width:480px){
+  .pg-hero .crumbs{margin-bottom:35px}
+  .hero-note{display:block}.hero-note p{margin:16px 0}
+  .program-index span{font-size:8px}.program-index strong{font-size:1.6rem}.program-index a+a{padding-left:15px}
+  .program-index b{right:8px;font-size:18px}
+  .pg-art{max-width:240px}.pg-copy{padding:65px 25px 30px}
+  .pg-copy h2{font-size:2.8rem}.pg-list .wrap{gap:60px}
+  .journey-list{grid-template-columns:1fr}.jstep{display:grid;grid-template-columns:44px 1fr;gap:20px}.jn,.jstep.on .jn{width:44px;height:44px}
+  .program-strip i{margin:0 5px}.program-strip .wrap{font-size:8px}
+}
+@media(prefers-reduced-motion:reduce){
+  .pg .pg-art,.pg .pg-copy,.pg.rev .pg-art,.pg.rev .pg-copy{transition:none;transform:none!important}
+  .pg-art::before{animation:none}.rv{opacity:1;transform:none}
+}
+/* One drawn thread, with the needle following the line. */
+.hero-thread .program-thread-line,.hero-thread .program-thread-needle{stroke-dasharray:1;stroke-dashoffset:1}
+.hero-thread .program-thread-line{animation:program-thread-draw 1.8s linear .2s forwards}
+.hero-thread .program-thread-needle{animation:program-thread-draw .28s linear 2s forwards}
+@keyframes program-thread-draw{to{stroke-dashoffset:0}}
+.program-hero-grid::before{bottom:-24%;}
+.program-index{position:relative;margin-top:clamp(64px,7vw,95px)}
+@media(hover:hover){.pg .pg-art:hover,.pg.rev .pg-art:hover{transform:none}}
+/* A restrained scroll-in swing belongs to the paper tag only. */
+@media(max-width:860px) and (hover:none) and (prefers-reduced-motion:no-preference){
+ .pg.rv,.pg.rv.in{transform:none}
+ .pg-copy.tag-entered{animation:program-tag-arrive 1.05s ease-out both;transform-origin:42px 42px}
+ .pg.rev .pg-copy.tag-entered{animation-name:program-tag-arrive-reverse}
+}
+@keyframes program-tag-arrive{0%{transform:translateY(16px) rotate(3.5deg)}55%{transform:translateY(0) rotate(-1deg)}78%{transform:rotate(2deg)}100%{transform:rotate(1.3deg)}}
+@keyframes program-tag-arrive-reverse{0%{transform:translateY(16px) rotate(-3.5deg)}55%{transform:translateY(0) rotate(1deg)}78%{transform:rotate(-2deg)}100%{transform:rotate(-1.3deg)}}
+@media(prefers-reduced-motion:reduce){.hero-thread .program-thread-line,.hero-thread .program-thread-needle{animation:none;stroke-dashoffset:0}}
+@media(min-width:861px){.program-hero-grid::before{bottom:-40%}.program-index{margin-top:clamp(90px,9vw,120px)}}
+@media(max-width:480px){.pg-hero .p-title{font-size:clamp(3.8rem,16vw,4.8rem)}}
+@media(max-width:860px){.program-index{margin-top:120px}}
+@media(max-width:480px){.program-hero-grid::before{font-size:clamp(4.8rem,20vw,7rem);left:3%;bottom:-19%}}
+@media(min-width:861px){.program-index{margin-top:clamp(145px,13vw,180px)}}
+/* Keep the background lettering inside the opening, behind the hero content. */
+.program-hero-grid::before{top:50%;bottom:auto;transform:translateY(-50%)}
+@media(min-width:861px){.program-index{margin-top:clamp(55px,6vw,80px)}}
+@media(max-width:860px){.program-index{margin-top:50px}}

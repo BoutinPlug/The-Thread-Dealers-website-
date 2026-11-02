@@ -1,0 +1,14 @@
+/* Keep the complete artwork centered within the existing collection circles. */
+.stage-art .art-img{width:64%;height:64%;gap:0;perspective:none}
+.stage-art .art-img img{display:block;width:100%;height:100%;max-width:100%;object-fit:contain;animation:none;filter:drop-shadow(3px 12px 8px rgba(6,38,58,.13))}
+.stage-art .art-hd{width:68%;height:64%;gap:0}
+.stage-art .art-hd img:first-child{width:62%;height:86%}
+.stage-art .art-hd img:last-child{width:49%;height:100%;margin-left:-11%}
+.stage-art::after{display:none}
+.tag-card .pic img{object-fit:contain;max-width:86%}
+.tag-card .pic img:has(+img){max-width:62%}
+.tag-card .pic img+img{max-width:33%}
+.fit-pic img{object-fit:contain}
+.bg-art.bg-pants{--k:1.5!important}
+.art-hd .bg-pants{--w:44%;margin-left:-8%}
+.is-3d:not(.phone3d) .art-hd .bg-pants{--w:44%}
