@@ -90,3 +90,16 @@
   .process-divider .wrap{flex-wrap:nowrap;gap:8px;font-size:clamp(6.5px,1.95vw,9px);letter-spacing:.06em;white-space:nowrap}
   .process-divider i{padding:0 2px}
 }
+
+/* Desktop: the opening fills the first screen and ends with the strip, a little above the bottom.
+   Same strip height and position on Core Collection, How It Works and Custom Programs. */
+@media(min-width:761px){
+  :root{--first:calc(100svh - var(--hdr,77px) - 47px - 28px)}
+  .how-hero{min-height:var(--first);box-sizing:border-box;display:flex;flex-direction:column;padding-block:28px 28px}
+  .how-hero>.wrap{width:100%;box-sizing:border-box;flex:1;display:flex;flex-direction:column}
+  .how-hero .hh-grid{flex:1;align-items:center;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr)}
+  .how-hero .stitch{width:min(520px,100%,calc((100svh - 330px) * .8));margin:0 auto}
+  .how-hero .p-title{font-size:min(clamp(3.4rem,7.4vw,7rem),12svh)}
+  .process-divider{box-sizing:border-box;height:47px;padding:0;display:flex;align-items:center}
+  .process-divider>.wrap{width:100%;box-sizing:border-box}
+}

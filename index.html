@@ -406,6 +406,11 @@ html:not(.is-3d) .tape{display:none}
 .is-3d:not(.phone3d) .art-je .bg-art{--w:80%}
 .is-3d:not(.phone3d) .art-cp .bg-art{--w:100%}
 .is-3d:not(.phone3d) .card-media{align-self:stretch;display:flex;align-items:center;justify-content:center}
+/* Art fits the room left so every card keeps its explore link */
+.is-3d:not(.phone3d) .world .card{grid-template-rows:auto minmax(0,1fr) auto}
+.is-3d:not(.phone3d) .card-media{min-height:0}
+.is-3d:not(.phone3d) .card-art{height:100%;min-height:0}
+.is-3d:not(.phone3d) .card-art .bg-art{height:100%;padding-bottom:0}
 /* Footer contacts */
 .contacts{display:grid;gap:10px;justify-items:start}
 .contact{display:inline-flex;align-items:center;gap:12px;font:700 16px var(--body);color:var(--ink);background:none;border:0;border-radius:3px;padding:8px 12px 8px 8px;margin-left:-8px;cursor:pointer;transition:background .2s,color .2s}
@@ -959,7 +964,7 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:12px}
   <section class="start dotgrid" id="start" data-chapter="Start a project" aria-labelledby="s-title">
     <div class="wrap">
       <p class="eyebrow">05 / Start a project</p>
-      <h2 class="h2" id="s-title" data-orbit>Tell us what you are making.</h2>
+      <h2 class="h2" id="s-title" data-orbit>Tell us what you have in mind.</h2>
       <p class="intro">No print terminology needed. Pricing is tailored to your fabric selection, decoration method and design; we’ll confirm your quote once we understand your project.</p>
       <div class="start-grid">
         <form id="brief-form" novalidate>
