@@ -370,13 +370,13 @@ document.querySelectorAll('.faq').forEach((item, _, all) => item.addEventListene
   const root = document.querySelector('.bp-scan');
   if (!root) return;
   const C = [
-    {n: '01', t: 'Hoodies & Track Pants', img: 'img/core-hoodie-v1.png', href: 'hoodies-track-pants.html', b: 'Staff, crews, teams and merch', c: 'Two hoodie weights plus matching pants', s: 'Tested size chart, proven fit',
+    {n: '01', t: 'Hoodies & Track Pants', img: 'img/core-hoodie-v1.webp', href: 'hoodies-track-pants.html', b: 'Staff, crews, teams and merch', c: 'Two hoodie weights plus matching pants', s: 'Tested size chart, proven fit',
       d: [[24, 62, 'r', 'Two hoodie weights'], [52, 30, 'l', 'Colour-matched stitching'], [84, 64, 'r', 'Pants on the same program']]},
-    {n: '02', t: 'Premium Tees', img: 'img/core-tee-v1.png', href: 'premium-tees.html', b: 'Staff, events and everyday merch', c: 'Two cotton weights', s: 'Separate size charts for each tee',
+    {n: '02', t: 'Premium Tees', img: 'img/core-tee-v1.webp', href: 'premium-tees.html', b: 'Staff, events and everyday merch', c: 'Two cotton weights', s: 'Separate size charts for each tee',
       d: [[22, 22, 'l', 'Drop-shoulder fit'], [52, 70, 'r', '260 or 280 GSM cotton'], [84, 34, 'l', 'Colour-matched stitching']]},
-    {n: '03', t: 'Performance & Jerseys', img: 'img/core-jersey-v1.png', href: 'performance-jerseys.html', b: 'Teams, leagues, gyms and events', c: 'Simple custom or fully custom', s: 'Tested size chart, built from proven sizes',
+    {n: '03', t: 'Performance & Jerseys', img: 'img/core-jersey-v1.webp', href: 'performance-jerseys.html', b: 'Teams, leagues, gyms and events', c: 'Simple custom or fully custom', s: 'Tested size chart, built from proven sizes',
       d: [[22, 76, 'r', 'Performance fabric'], [50, 30, 'l', 'Full sublimation'], [82, 66, 'r', 'Sampled and quality checked']]},
-    {n: '04', t: 'Custom Hats', img: 'img/core-cap-v1.png', href: 'custom-hats.html', b: 'Finishing any kit', c: 'Proven custom headwear', s: 'Proven sizing, structured fit',
+    {n: '04', t: 'Custom Hats', img: 'img/core-cap-v1.webp', href: 'custom-hats.html', b: 'Finishing any kit', c: 'Proven custom headwear', s: 'Proven sizing, structured fit',
       d: [[24, 52, 'l', 'Structured or relaxed crown'], [50, 72, 'r', 'Choose your panels'], [80, 24, 'l', 'Curved or flat brim']]}
   ];
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
