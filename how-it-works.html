@@ -794,10 +794,18 @@ h1,h2,h3{text-wrap:balance}
         <div class="rv">
           <p class="eyebrow">How it works</p>
           <h1 class="p-title">We walk you<br><span style="color:var(--rust)">through every</span><br><span style="color:var(--rust)">step.</span></h1>
-          <p class="lead">Four simple steps from idea to delivery. You describe the goal, we handle the garment, the factory and every detail in between.</p>
+          <p class="lead">Four simple steps from idea to delivery. You share the goal, we handle the garment, factory and details.</p>
           <div class="cta-row"><a class="btn" href="start-project.html">Start a project <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"/></svg></a><a class="link" href="#journey">See each step</a></div>
         </div>
-        <ol class="hh-dial" aria-hidden="true"><li>Purpose</li><li>Garment</li><li>Approve</li><li>Delivered</li></ol>
+        <div class="stitch" id="stitch" aria-hidden="true">
+          <svg viewBox="0 0 420 520" class="stitch-svg">
+            <path class="st-guide" id="stGuide"/>
+            <path class="st-thread" id="stThread"/>
+            <g transform="translate(300 452)"><g class="st-knot" id="stKnot"><circle r="9"/><path d="M-4 -3c6 -6 12 2 4 7"/></g></g>
+            <g class="st-stops" id="stStops"></g>
+            <g class="st-needle" id="stNeedle"><path d="M-16,0 C-16,-6.5 -7,-9.5 4,-8.5 L82,-2 L96,0 L82,2 L4,8.5 C-7,9.5 -16,6.5 -16,0 Z"/><ellipse cx="-3" cy="0" rx="7.5" ry="2.6"/></g>
+          </svg>
+        </div>
       </div>
     </div>
   </section>
@@ -883,6 +891,7 @@ if('IntersectionObserver' in window){var io=new IntersectionObserver(function(en
 var st=document.querySelector('.stage-art');if(st)requestAnimationFrame(function(){st.classList.add('enter')});
 })();
 </script>
+<script src="how-stitch.js" defer></script>
 <script src="signature-animation.js" defer></script>
 <script src="back-to-top.js" defer></script>
 </body>

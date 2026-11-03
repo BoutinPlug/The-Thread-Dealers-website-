@@ -55,4 +55,4 @@
 @keyframes stepPop{0%{transform:scale(1)}45%{transform:scale(1.2)}100%{transform:scale(1)}}
 @media (max-width:959px){.steps.play::after{transform:scaleY(1)}}
 
-@media(max-width:959px){.how .steps{grid-template-columns:1fr;gap:34px}.how .steps::before,.how .steps::after{left:calc(var(--n)/2 - 1px);right:auto;top:calc(var(--n)/2);bottom:calc(var(--n)/2);height:auto;width:2px}.how .steps::after{transform:scaleY(.14);transform-origin:top}.how .steps.play::after{transform:scaleY(1)}}
+@media(max-width:959px){.how .steps{grid-template-columns:1fr;gap:34px}.how .steps::before,.how .steps::after{left:calc(var(--n)/2 - 1px);right:auto;top:calc(var(--n)/2);bottom:var(--tail,calc(var(--n)/2));height:auto;width:2px}.how .steps::after{transform:scaleY(.14);transform-origin:top}.how .steps.play::after{transform:scaleY(1)}}

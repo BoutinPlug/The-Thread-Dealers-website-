@@ -21,7 +21,7 @@
 .program-index b{position:absolute;right:17px;bottom:25px;font-size:25px;font-weight:400;color:var(--rust);transition:transform .25s}
 .program-index a:hover{color:var(--rust-ink);background:rgba(255,255,255,.25)}
 .program-index a:hover b{transform:translate(3px,3px)}
-.program-strip{background:var(--ink);color:var(--cream);padding-block:18px}
+.program-strip{background:var(--ink);color:var(--cream);padding-block:18px;border-block:3px solid var(--rust);box-shadow:0 -6px 0 -3px var(--cream),0 6px 0 -3px var(--cream)}
 .program-strip .wrap{display:flex;justify-content:space-between;gap:16px;font:800 10px/1.5 var(--body);letter-spacing:.1em;text-transform:uppercase}
 .program-strip i{color:var(--rust-lite);font-style:normal;margin:0 14px}
 .pg-list{padding-block:68px 100px;background:var(--cream-2)}
@@ -131,3 +131,100 @@
 .program-hero-grid::before{top:50%;bottom:auto;transform:translateY(-50%)}
 @media(min-width:861px){.program-index{margin-top:clamp(55px,6vw,80px)}}
 @media(max-width:860px){.program-index{margin-top:50px}}
+
+/* Rotating strip text is for phones only */
+.strip-rot{display:none}
+
+/* Phones: a calmer opening. Short intro, oversized CUSTOM behind it, a slim rotating strip in view,
+   then the four programs as a compact jump-to selector. Desktop is unchanged. */
+@media(max-width:760px){
+  .pg-hero{display:flex;flex-direction:column}
+  .pg-hero>.wrap{width:100%;box-sizing:border-box}
+  .pg-hero .crumbs{margin-bottom:22px}
+  .pg-hero .eyebrow{margin-bottom:10px}
+  .program-hero-grid::before{left:50%;top:calc(50% - 76px);transform:translate(-50%,-50%) rotate(-4deg);font-size:calc((100vw - 34px) / 3.05);-webkit-text-stroke:1.5px rgba(6,38,58,.11)}
+  /* The opening matches How It Works: the strip sits at the same height near the bottom of the first screen */
+  .pg-hero>.wrap:first-child{min-height:483px;display:flex;flex-direction:column;padding-bottom:14px}
+  .program-hero-grid{flex:1;display:flex;flex-direction:column;align-items:stretch;justify-content:center;gap:18px}
+  .pg-hero .p-title{font-size:min(19vw,6rem)}
+  .hero-thread{margin-top:6px}
+  .hero-note{display:block;border-top:1px solid var(--line);padding:16px 0 0}
+  .hero-note .note-index{font-size:clamp(1.7rem,8vw,2.3rem)}
+  .hero-note .note-more{display:none}
+  .hero-note p{margin:12px 0 0;font-size:15px;line-height:1.6;max-width:34ch}
+  .hero-note .note-small{font-size:13px;margin-top:6px;max-width:none}
+  .hero-note .link{display:inline-block;margin-top:12px}
+
+  .program-strip{order:2;padding-block:9.5px;overflow:hidden}
+  .program-strip .wrap{display:block;max-width:none;padding:0;font-size:10px}
+  .program-strip .wrap>span:not(.strip-rot){display:none}
+  /* One continuous line of phrases scrolling right to left; four copies so the loop never shows a seam */
+  .strip-rot{display:flex;width:max-content;animation:strip-marq 40s linear infinite;will-change:transform}
+  .strip-rot b{font-weight:800;white-space:nowrap}
+  .strip-rot i{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--rust);vertical-align:middle;margin:0 1.1em 2px}
+
+  .program-index-wrap{order:3;padding-top:30px;padding-bottom:10px}
+  .program-index{margin-top:0;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;border-top:0;counter-reset:prog}
+  .program-index::before{content:"Jump to a program";grid-column:1/-1;font-size:9.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+  .program-index a,.program-index a+a,.program-index a:nth-child(3),.program-index a:nth-child(n+3){display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--line);border-radius:3px;background:rgba(255,255,255,.35);counter-increment:prog}
+  .program-index a::before{content:"0" counter(prog);font:800 11px/1 var(--body);letter-spacing:.06em;color:var(--rust)}
+  .program-index span{display:none}
+  .program-index strong{margin:0;font-size:.92rem;line-height:1;flex:1}
+  .program-index b{position:static;font-size:13px}
+}
+@keyframes strip-marq{to{transform:translateX(-25%)}}
+@media(max-width:760px) and (prefers-reduced-motion:reduce){
+  .strip-rot{animation:none}
+}
+
+/* Program numbers stamp in once they reach the middle of the screen (all sizes) */
+.pg-num{z-index:2;transform-origin:50% 60%}
+.sig-armed .pg-num{opacity:0}
+.sig-armed .pg-num.stamped{animation:pg-stamp .55s cubic-bezier(.2,1.3,.4,1) both}
+@keyframes pg-stamp{
+  0%{opacity:0;transform:scale(2.6) rotate(-16deg)}
+  55%{opacity:1;transform:scale(.9) rotate(-5deg);color:rgba(201,74,44,.35)}
+  75%{transform:scale(1.04) rotate(-7deg)}
+  100%{opacity:1;transform:scale(1) rotate(-6deg);color:transparent}
+}
+@media(prefers-reduced-motion:reduce){.sig-armed .pg-num{opacity:1}.sig-armed .pg-num.stamped{animation:none;transform:rotate(-6deg)}}
+
+/* The longer line moves under the row on phones; hidden elsewhere */
+.pg-d-out{display:none}
+
+/* Phones: desktop's side by side, scaled down. Picture and tag share a row and swap sides each program. */
+@media(max-width:760px){
+  .pg,.pg.rev{grid-template-columns:42% minmax(0,1fr);gap:14px 14px;align-items:center}
+  .pg.rev{grid-template-columns:minmax(0,1fr) 42%}
+  .pg-list{padding-top:26px}
+  .pg-list .wrap{gap:56px}
+  .program-caption{margin-bottom:8px}
+  .pg-art,.pg.rev .pg-art{order:0;max-width:none;width:100%;margin:0;justify-self:stretch}
+  .pg.rev .pg-art{order:2}
+  .pg-art::after{display:none}
+  .pg-art::before{inset:-7px}
+  .pg-num{top:-10px;left:-6px;font-size:2.5rem}
+  .pg-copy,.pg.rev .pg-copy{justify-self:stretch;max-width:none;min-height:0;margin:0;padding:40px 14px 16px;clip-path:polygon(18px 0,100% 0,100% 100%,0 100%,0 18px);transform:rotate(1deg);transform-origin:24px 24px;rotate:var(--swing,0deg)}
+  .pg.rev .pg-copy{transform:rotate(-1deg)}
+  .pg:hover .pg-copy,.pg.rev:hover .pg-copy,.pg .pg-copy:hover,.pg.rev .pg-copy:hover{transform:rotate(1deg);box-shadow:0 28px 48px -32px rgba(0,0,0,.85)}
+  .pg.rev:hover .pg-copy,.pg.rev .pg-copy:hover{transform:rotate(-1deg)}
+  .pg-copy::before{inset:7px;clip-path:polygon(14px 0,100% 0,100% 100%,0 100%,0 14px)}
+  .pg-copy::after{left:20px;top:20px;width:10px;height:10px}
+  .pg-copy .eyebrow{font-size:9px;margin-bottom:7px}.pg-copy .eyebrow::before{width:14px}
+  .pg-copy h2{font-size:1.75rem;max-width:none}
+  .pg-copy .pg-sub{font-size:12px;line-height:1.45;margin-top:8px}
+  .pg-copy .pg-d{display:none}
+  .pg-tags{gap:6px;margin-top:10px}
+  .pg-tags li{font-size:11.5px;grid-template-columns:18px 1fr;gap:7px}
+  .pg-tags li::before{width:17px;height:17px;font-size:9px}
+  .program-cta{font-size:9.5px;margin-top:12px;padding-top:10px;gap:8px}.program-cta span{font-size:15px}
+  .pg-d-out{display:block;grid-column:1/-1;order:3;margin:6px 2px 0;font-size:14.5px;line-height:1.65;color:var(--muted)}
+}
+/* Phones: the sketch circles keep moving. The dotted ring turns and the garment drifts gently. */
+@media(max-width:760px) and (prefers-reduced-motion:no-preference){
+  .pg-art::before{animation:spin 24s linear infinite}
+  .pg.rev .pg-art::before{animation-direction:reverse}
+  .pg-art .program-mockup{animation:pg-drift 5.5s ease-in-out infinite}
+  .pg.rev .pg-art .program-mockup{animation-delay:-2.7s}
+}
+@keyframes pg-drift{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-5px) rotate(-1.5deg)}}

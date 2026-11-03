@@ -558,7 +558,7 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:12px}
   .rail{display:none}
   .top::after{display:block}
   .steps{grid-template-columns:1fr;gap:34px}
-  .steps::before,.steps::after{top:calc(var(--n) / 2);bottom:calc(var(--n) / 2);left:calc(var(--n) / 2 - 1px);right:auto;width:2px;height:auto}
+  .steps::before,.steps::after{top:calc(var(--n) / 2);bottom:var(--tail,calc(var(--n) / 2));left:calc(var(--n) / 2 - 1px);right:auto;width:2px;height:auto}
   .steps::before{background:repeating-linear-gradient(rgba(6,38,58,.35) 0 6px,transparent 6px 12px)}
   .steps::after{transform-origin:50% 0;transform:scaleY(.14)}
   .steps li{display:grid;grid-template-columns:var(--n) 1fr;column-gap:20px}
@@ -580,6 +580,8 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:12px}
   .top.open .nav a::after{display:none}
   .top.open .nav .nav-cta{display:block}
   .nav-cta a{color:var(--rust-ink)}
+  .top.open .nav .nav-cta{margin-top:18px}
+  .top.open .nav .nav-cta a{display:flex;justify-content:center;align-items:center;background:var(--rust);color:var(--cream);border:0;border-radius:2px;padding:17px 22px;font:800 13.5px/1 var(--body);letter-spacing:.08em;text-transform:uppercase}
 }
 @media (max-width:760px){
   .q-tiles,.q-foot{grid-template-columns:1fr}
@@ -607,6 +609,43 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:12px}
 /* Phone layer: loaded last so it wins over shared rules */
 .js-blend .hero .link,.js-blend .hero .scroll-cue{color:inherit}
 .swipe-dots{display:none}
+/* Desktop first view: fit the title and the tagline inside the first screen */
+@media (min-width:761px){
+  .hero{padding-top:calc(var(--head-h) + clamp(8px,1.5vh,20px));padding-bottom:clamp(20px,3vh,40px)}
+  .hero-title{padding:clamp(22px,4vh,44px) 0 0 4vw}
+  .hero-foot{margin-top:clamp(-56px,-4vh,-24px)}
+  .mega{font-size:clamp(4.2rem,min(15vw,25vh),15.5rem)}
+}
+/* First screen: big logo, tagline stacked bottom-left; the rest rises in once you scroll */
+.hero-line{max-width:none;margin:0;width:min-content;line-height:.92}
+.hero-line span{display:block}
+.hero-line .hl1{white-space:nowrap;padding-bottom:.12em;margin-bottom:.16em;border-bottom:2px solid var(--rust)}
+.hero-line .hl2{color:var(--rust);text-wrap:balance}
+.hero{padding-top:calc(var(--head-h) + env(safe-area-inset-top,0px) + 14px)}
+.hero-first{min-height:calc(100svh - var(--head-h) - env(safe-area-inset-top,0px) - 14px - clamp(24px,4vh,44px));display:flex;flex-direction:column}
+.hero-first .hero-line{margin-top:auto}
+.hero-first .hero-title{flex:1;align-items:center}
+@media (max-width:760px){
+  .hero-kicker{font-size:10px;letter-spacing:.14em;white-space:nowrap}
+  .hero-first{min-height:min(calc(100svh - var(--head-h) - env(safe-area-inset-top,0px) - 14px - 24px),155vw)}
+  .hero-first .hero-title{padding:14px 0;justify-content:flex-start}
+  .hero-foot{padding-top:28px}
+  .hero .mega{line-height:.9}
+  .hero-line{font-size:min(5.6vw,1.6rem)}
+}
+.hero .hero-more{opacity:0;transform:translateY(18px);transition:opacity .6s,transform .7s cubic-bezier(.2,.8,.3,1)}
+.hero .hero-more.shown{opacity:1;transform:none}
+.hero .hero-sub.hero-more.shown{opacity:.78}
+.hero-sub.hero-more{margin-top:0}
+.hero-foot{padding-top:clamp(72px,14vh,140px)}
+.hero .scroll-cue{display:none}
+@media (min-width:761px){
+  .hero-title{padding:clamp(16px,3vh,36px) 0 clamp(20px,3.5vh,40px);justify-content:center;padding-inline:0}
+  .hero .mega{font-size:clamp(4.2rem,min(17vw,calc((100svh - var(--head-h) - 270px)/2.85)),19rem)}
+  .hero-foot{flex-direction:column;align-items:flex-start;text-align:left}
+  .hero-line{font-size:clamp(1.45rem,2.1vw,2.3rem)}
+  .hero-sub{max-width:52ch}
+}
 @media (max-width:640px){
   .hero-title{padding-left:6px;padding-right:6px}
   .blend{height:16vh}
@@ -636,8 +675,12 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:12px}
 /* Phones in the 3D world */
 .is-3d .world{margin:0;padding:0;overflow:visible;scroll-snap-type:none;grid-auto-flow:initial}
 .is-3d .swipe-note,.is-3d .swipe-dots{display:none!important}
-.phone3d .world .card{padding:1.7em 1.5em 1.5em;grid-template-columns:1fr;grid-template-rows:auto auto 1fr auto;row-gap:.9em}
+.phone3d .world .card{padding:1.7em 1.5em 1.5em;grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr) auto auto;row-gap:.9em}
 .phone3d .card-media{grid-column:1;grid-row:2}
+/* Art shrinks to the room left so the explore link always shows */
+.phone3d .card-media{min-height:0;align-self:stretch;display:flex}
+.phone3d .card-art{height:100%;min-height:0}
+.phone3d .card-art .bg-art{height:100%;padding-bottom:0}
 .phone3d .card-body{grid-column:1;grid-row:3;align-self:start}
 .phone3d .card-title{font-size:3.1em}
 .phone3d .card-line{font-size:1.05em}
@@ -652,6 +695,10 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:12px}
 .phone3d .hud-row b{font-size:1.8rem}
 .phone3d .hud-row span{font-size:13.5px}
 .phone3d .scene{top:52%}
+/* Phones: pull the collection chapter up under the hero's empty tail so its title follows the buttons */
+.phone3d.js-blend .blend{height:0}
+.phone3d.js-blend .hero{z-index:1;padding-bottom:0}
+.phone3d.js-blend .spiral{margin-top:-14svh;background:transparent}
 .phone3d .quality-panel{width:calc(100vw - 24px);top:calc(50% + var(--head-h) / 2)}
 .phone3d .q-head .eyebrow{margin-bottom:6px;font-size:10.5px}
 .phone3d .q-title{font-size:1.95rem}
@@ -740,6 +787,7 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:12px}
 <main>
   <section class="hero dotgrid" id="top" data-chapter="Intro">
     <div class="wrap">
+     <div class="hero-first">
       <p class="hero-kicker">Premium custom apparel / Toronto, ON</p>
       <div class="hero-title">
         <h1 class="mega" aria-label="The Thread Dealers">
@@ -748,7 +796,7 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:12px}
             <span class="line l2">Thread</span>
             <span class="line l3">Dealers</span>
             <svg class="thread" viewBox="0 0 1600 630" preserveAspectRatio="xMidYMid meet">
-              <path class="t" id="threadPath" d="M0,262 C110,250 220,236 330,244 C470,254 600,318 760,322 C850,324 915,294 942,256 C966,222 942,180 902,186 C860,192 860,236 902,272 C985,340 1085,404 1210,432 C1300,452 1390,452 1470,450"/>
+              <path class="t" id="threadPath" d="M0,262 C110,250 220,236 330,244 C470,254 600,318 760,322 C850,324 915,294 942,256 C966,222 942,180 902,186 C860,192 860,236 902,272 C985,340 1085,404 1210,432 C1300,452 1390,452 1470,450" data-d-phone="M286,262 C350,250 414,236 478,244 C559,254 634,318 727,322 C782,324 838,294 860,256 C881,222 860,180 826,186 C791,192 791,236 826,272 C897,340 956,404 1029,432 C1081,452 1134,452 1180,450"/>
               <g id="needle" transform="translate(1470 450) rotate(-1)">
                 <path d="M-16,0 C-16,-6.5 -7,-9.5 4,-8.5 L118,-2.2 L134,0 L118,2.2 L4,8.5 C-7,9.5 -16,6.5 -16,0 Z" fill="var(--ink)"/>
                 <ellipse cx="-3" cy="0" rx="7.5" ry="2.6" fill="var(--cream)"/>
@@ -757,11 +805,12 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:12px}
           </span>
         </h1>
       </div>
+      <p class="hero-line"><span class="hl1">Premium custom apparel</span> <span class="hl2">people will actually want to wear.</span></p>
+     </div>
       <div class="hero-foot">
         <div>
-          <p class="hero-line">Premium custom apparel people will actually want to wear.</p>
-          <p class="hero-sub">We guide businesses, teams and brands to the right garment, run the factory side for you, and deliver clothing that stays in rotation.</p>
-          <div class="cta-row">
+          <p class="hero-sub hero-more">We guide businesses, teams and brands to the right garment, run the factory side for you, and deliver clothing that stays in rotation.</p>
+          <div class="cta-row hero-more">
             <a class="btn" href="start-project.html">Start a Project <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 11L11 3M5 3h6v6"/></svg></a>
             <a class="link" href="#collection">See the Core Collection</a>
           </div>
@@ -1029,6 +1078,10 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:12px}
   function toast(msg){toastEl.textContent=msg;toastEl.classList.add('show');clearTimeout(toastT);toastT=setTimeout(function(){toastEl.classList.remove('show')},3400)}
   var top=$('#top-bar'), menuBtn=$('#menu-btn');
   menuBtn.addEventListener('click',function(){var o=top.classList.toggle('open');menuBtn.setAttribute('aria-expanded',o)});
+  /* A tap outside the open menu, or Escape, closes it */
+  function closeMenu(){top.classList.remove('open');menuBtn.setAttribute('aria-expanded','false')}
+  document.addEventListener('click',function(e){if(top.classList.contains('open')&&!top.contains(e.target))closeMenu()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&top.classList.contains('open')){closeMenu();menuBtn.focus()}});
   $$('#site-nav a').forEach(function(a){a.addEventListener('click',function(){top.classList.remove('open');menuBtn.setAttribute('aria-expanded','false')})});
   $$('[data-copy]').forEach(function(b){b.addEventListener('click',function(){
     var t=b.dataset.copy;
@@ -1039,6 +1092,7 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:12px}
   /* Hero thread: the needle leads the thread along the logo path */
   (function(){
     var path=$('#threadPath'), needle=$('#needle'); if(!path) return;
+    if(matchMedia('(max-width:760px)').matches) path.setAttribute('d',path.dataset.dPhone);
     var L=path.getTotalLength();
     function place(t){
       var d=L*t, p=path.getPointAtLength(d), a=path.getPointAtLength(Math.max(0,d-3)), b=path.getPointAtLength(Math.min(L,d+3));
@@ -1357,7 +1411,7 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:12px}
   root.classList.add('js-blend');
   var INK=[6,38,58], CREAM=[244,235,221];
   function blendScroll(vh){
-    var start=Math.min(hero.offsetHeight*.12,160), end=spiral.offsetTop-vh;
+    var start=Math.min(hero.offsetHeight*.12,160), end=Math.max(spiral.offsetTop-vh,start+vh*.3);
     var t=smoother(map(scrollY,start,Math.max(start+1,end)));
     backdrop.style.opacity=t.toFixed(3);
     var c=INK.map(function(v,i){return Math.round(lerp(v,CREAM[i],smoother(map(t,.35,.75))))});
@@ -1446,6 +1500,10 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:12px}
   armSig();
   (function(){
     var st=$('#steps'); if(!st)return;
+    /* Stacked layout: stop the line at the centre of circle 4, not the bottom of its text */
+    function tail(){var n=st.lastElementChild.querySelector('.step-num'),a=st.getBoundingClientRect(),b=n.getBoundingClientRect();st.style.setProperty('--tail',Math.max(0,a.bottom-(b.top+b.bottom)/2)+'px')}
+    tail();addEventListener('resize',tail);addEventListener('load',tail);document.fonts&&document.fonts.ready.then(tail);
+    new IntersectionObserver(tail).observe(st);
     if(reduceMQ.matches||!('IntersectionObserver' in window)){st.classList.add('play');return}
     var o=new IntersectionObserver(function(en){if(en[0].isIntersecting){st.classList.add('play');o.disconnect()}},{threshold:.2});
     o.observe(st);
@@ -1499,6 +1557,16 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:12px}
 
 </script>
 <script>(function(){var t=document.getElementById("toTop"),s=document.getElementById("collection");function u(){t.classList.toggle("show",s.getBoundingClientRect().bottom<0)}addEventListener("scroll",function(){requestAnimationFrame(u)},{passive:true});u();t.addEventListener("click",function(e){e.preventDefault();window.scrollTo({top:0,behavior:"smooth"})})})();</script>
+<script>/* Logo fills the free space between the kicker and the tagline */
+(function(){var t=document.querySelector('.hero-first .hero-title'),g=document.querySelector('.hero .mega'),w=document.querySelector('.hero .mega-wrap');if(!t||!g)return;
+var p=document.getElementById('threadPath'),sv=w.querySelector('.thread'),ph=matchMedia('(max-width:760px)');
+if(ph.matches&&p.dataset.dPhone)p.setAttribute('d',p.dataset.dPhone);
+function fit(){g.style.fontSize='40px';g.style.marginLeft='';var cs=getComputedStyle(t),h=t.clientHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom),cw=t.clientWidth,r=w.getBoundingClientRect(),wd=r.width;
+if(ph.matches){var pr=p.getBoundingClientRect(),u=sv.getBoundingClientRect().width/1600;wd=Math.max(r.right,pr.right+140*u)-Math.min(r.left,pr.left);cw=innerWidth-24}
+var fs=Math.min(h/(r.height/40),cw*(ph.matches?1:.92)/(wd/40),320);g.style.fontSize=Math.max(fs,48)+'px';
+if(ph.matches){var a=w.getBoundingClientRect(),b=p.getBoundingClientRect(),L=Math.min(a.left,b.left);g.style.marginLeft=(12-L)+'px'}}
+fit();addEventListener('resize',fit);addEventListener('load',fit);document.fonts&&document.fonts.ready.then(fit)})();</script>
+<script>(function(){var m=document.querySelectorAll('.hero-more');function u(){var on=scrollY>30;m.forEach(function(e){e.classList.toggle('shown',on)})}addEventListener('scroll',u,{passive:true});u()})();</script>
 <script src="signature-animation.js" defer></script>
 </body>
 </html>
