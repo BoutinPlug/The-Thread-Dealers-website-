@@ -1,6 +1,6 @@
 /* One shared artwork set for every Core Collection selector and thumbnail. */
 window.__IMG = Object.fromEntries(['hoodie', 'pants', 'tee', 'jersey', 'cap'].map(function (name) {
-  return [name, 'img/core-' + name + '-v1.png'];
+  return [name, 'img/core-' + name + '-v1.webp'];
 }));
 window.__SM = window.__IMG;
 window.TDMockupAlt = {
