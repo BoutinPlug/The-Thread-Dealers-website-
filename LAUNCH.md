@@ -3,6 +3,17 @@
 The site is static HTML, so there is no build step. Netlify publishes the repository as it is
 and redeploys every time `main` changes.
 
+## 0. Still to finish before launch
+
+- [ ] **Hoodie fabric weights:** `hoodies-track-pants.html` shows "GSM to be confirmed" for both
+      weights (Everyday and Heavyweight). Add the real GSM numbers.
+- [ ] **Sample pricing:** `hoodies-track-pants.html` and `custom-hats.html` say paid samples are
+      "estimated at $70–$75. Exact pricing is to be confirmed." Confirm the price.
+- [ ] **Finish the four core product pages to the same standard as the rest of the site:**
+      `hoodies-track-pants.html`, `premium-tees.html`, `performance-jerseys.html`, `custom-hats.html`.
+- [ ] Confirm business details: email, phone, free sample on 100+ pieces, 50 piece minimum,
+      6 to 8 week delivery.
+
 ## 1. Put the site on Netlify (about 10 minutes)
 
 1. Go to netlify.com and sign up with your GitHub account.
