@@ -686,6 +686,23 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:12px}
   .chip span{padding:10px 12px;font-size:14px}
 }
 
+/* Phones: a lighter opening and a progress rail down the right edge that fills as questions are answered */
+.intro-short,.brief-rail{display:none}
+@media (max-width:760px){
+  .start .intro{display:none}
+  .intro-short{display:block;margin:12px 0 0;font-size:15px;line-height:1.5;color:var(--muted);max-width:32ch}
+  .brief-rail{display:flex;flex-direction:column;align-items:center;gap:8px;position:fixed;z-index:40;right:max(5px,env(safe-area-inset-right,0px));top:calc(var(--head-h,70px) + 18px);bottom:96px;width:22px;opacity:0;transform:translateX(12px);pointer-events:none;transition:opacity .35s,transform .45s cubic-bezier(.3,1.3,.5,1)}
+  .brief-rail.show{opacity:1;transform:none}
+  .brief-rail b{font:800 10px/1 var(--display);letter-spacing:.04em;color:var(--rust-ink);font-variant-numeric:tabular-nums}
+  .rail-track{position:relative;flex:1;width:3px;border-radius:2px;background:rgba(6,38,58,.14);overflow:hidden}
+  .rail-track i{position:absolute;inset:0;background:var(--rust);transform-origin:50% 0;transform:scaleY(var(--bp,0));transition:transform .5s cubic-bezier(.3,.9,.3,1)}
+  .rail-dots{position:absolute;top:18px;bottom:0;left:0;right:0;display:flex;flex-direction:column;justify-content:space-around;align-items:center;pointer-events:none}
+  .rail-dots i{width:9px;height:9px;border-radius:50%;background:var(--cream);box-shadow:inset 0 0 0 2px rgba(6,38,58,.3);transition:background .3s,box-shadow .3s,transform .35s cubic-bezier(.3,1.6,.5,1)}
+  .rail-dots i.on{background:var(--rust);box-shadow:inset 0 0 0 2px var(--rust);transform:scale(1.2)}
+  .start .wrap{padding-right:max(30px,var(--gr))}
+}
+@media (max-width:760px) and (prefers-reduced-motion:reduce){.brief-rail,.rail-track i,.rail-dots i{transition:none}}
+
 /* Phone header: scroll percentage, matching the desktop side rail */
 .top-pct{display:none}
 @media (max-width:959px){
@@ -727,8 +744,9 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:12px}
 </header><main><section class="start dotgrid" id="start" data-chapter="Start a project" aria-labelledby="s-title">
     <div class="wrap">
       <p class="eyebrow">Start a project</p>
-      <h1 class="h2" id="s-title">Tell us what you are making.</h1>
+      <h1 class="h2" id="s-title">Tell us what you have in mind.</h1>
       <p class="intro">No print terminology needed. Pricing is tailored to your fabric selection, decoration method and design; we’ll confirm your quote once we understand your project.</p>
+      <p class="intro-short">No print terms needed. We’ll quote once we know your project.</p>
       <div class="start-grid">
         <form id="brief-form" novalidate>
           <div class="row">
@@ -781,6 +799,7 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:12px}
             <p>Prefer to reach out directly? <strong>info@thethreaddealers.com</strong> or <strong>905 960 4412</strong></p>
           </div>
         </form>
+        <div class="brief-rail" id="brief-rail" aria-hidden="true"><b id="rail-count">0/6</b><span class="rail-track"><i></i></span><span class="rail-dots"><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
         <aside class="brief" aria-labelledby="brief-title">
           <h3 id="brief-title">Your brief so far</h3>
           <p class="brief-note">This fills in as you answer the form.</p>
@@ -816,7 +835,7 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:12px}
     </div>
     <small>© 2026 The Thread Dealers. Premium custom apparel.</small>
   </div>
-</footer><script>(function(){var $=function(s,c){return (c||document).querySelector(s)},$$=function(s,c){return [].slice.call((c||document).querySelectorAll(s))};var t=$('#top-bar'),b=$('#menu-btn');if(b)b.addEventListener('click',function(){var open=t.classList.toggle('open');b.setAttribute('aria-expanded',open)});/* Form and live brief */
+</footer><div class="toast" id="toast" role="status" aria-live="polite"></div><script>(function(){var $=function(s,c){return (c||document).querySelector(s)},$$=function(s,c){return [].slice.call((c||document).querySelectorAll(s))};var t=$('#top-bar'),b=$('#menu-btn');if(b)b.addEventListener('click',function(){var open=t.classList.toggle('open');b.setAttribute('aria-expanded',open)});/* Form and live brief */
   var form=$('#brief-form'), list=$('#brief-list'), count=$('#brief-count'), err=$('#form-err');
   function val(n){var el=form.elements[n];return el?(el.value||'').trim():''}
   function checked(n){return $$('input[name="'+n+'"]:checked',form).map(function(i){return i.value})}
@@ -834,10 +853,21 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:12px}
     count.textContent=done+' of 6 answered';
     list.style.setProperty('--bp',(done/6).toFixed(3));
     list.parentNode.style.setProperty('--bp',(done/6).toFixed(3));
+    var rail=$('#brief-rail');
+    if(rail){rail.style.setProperty('--bp',(done/6).toFixed(3));$('#rail-count').textContent=done+'/6';
+      $$('li',list).forEach(function(li,i){$$('.rail-dots i',rail)[i].classList.toggle('on',li.classList.contains('ok'))})}
     return {contactOk:contactOk,p:p,g:g};
   }
   form.addEventListener('input',function(){update();if(!err.hidden)err.hidden=true});
   form.addEventListener('change',update);
+  /* footer contacts: tap or click copies the address or number */
+  var toastEl=$('#toast'),toastT;
+  function toast(msg){if(!toastEl)return;toastEl.textContent=msg;toastEl.classList.add('show');clearTimeout(toastT);toastT=setTimeout(function(){toastEl.classList.remove('show')},3400)}
+  $$('.contact').forEach(function(c){c.addEventListener('click',function(){
+    var t=c.dataset.copy, done=function(){c.classList.add('copied');toast((c.dataset.kind==='phone'?'Phone number':'Email')+' copied: '+t);setTimeout(function(){c.classList.remove('copied')},1600)};
+    var sel=function(){var r=document.createRange();r.selectNodeContents(c.querySelector('span'));var s=getSelection();s.removeAllRanges();s.addRange(r);toast('Selected. Press copy on your keyboard.')};
+    try{navigator.clipboard.writeText(t).then(done,sel)}catch(e){sel()}
+  })});
   /* every option can be switched off again with a second tap */
   $$('.chip input[type=radio]',form).forEach(function(r){
     r.addEventListener('pointerdown',function(){r._was=r.checked});
@@ -853,5 +883,9 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:12px}
     if(miss.length){err.textContent='Almost there. Please add '+miss.join(', ')+'.';err.hidden=false;return}
     $('#form-foot').innerHTML='<div class="done"><h3>Brief ready</h3><p>Thanks, '+val('name').replace(/[<>&]/g,'')+'. This concept page does not send yet. On the live site your brief goes straight to info@thethreaddealers.com and we follow up with recommendations and a quote.</p></div>';
   });
-  update();})();</script><script src="back-to-top.js" defer></script>
+  update();
+  /* phones: the progress rail shows while the questions are on screen */
+  var rail=$('#brief-rail');
+  if(rail&&'IntersectionObserver' in window)new IntersectionObserver(function(e){rail.classList.toggle('show',e[0].isIntersecting)},{rootMargin:'-30% 0px -30% 0px'}).observe(form);
+  })();</script><script src="back-to-top.js" defer></script>
 </body></html>

@@ -155,6 +155,7 @@
     $('sel').classList.remove('sel-switch');
     void $('sel').offsetWidth;
     $('sel').classList.add('sel-switch');
+    if ($('sel').dataset.seen) swingTag();
     if (options.push && location.hash !== '#' + data.slug) {
       history.pushState(null, '', '#' + data.slug);
     }
@@ -282,21 +283,28 @@
 })();
 
 
-/* Start dock: show after the hero, hide while the final Start a Project band is on screen */
+/* Start dock: show after the hero, hide while the final Start a Project band is on screen.
+   It waits until block 2 is left behind, so the bar never covers the scanner's details. */
 (function () {
   'use strict';
   const dock = document.getElementById('startDock');
   const hero = document.querySelector('.col-hero');
+  const scan = document.querySelector('.bp-scan');
   const band = document.querySelector('.cta-band');
   if (!dock || !hero) return;
-  let pastHero = false, bandOn = false;
+  let pastHero = false, bandOn = false, raf = 0;
   const paint = () => {
-    const on = pastHero && !bandOn;
+    raf = 0;
+    const gate = scan ? scan.getBoundingClientRect().bottom < innerHeight - 110 : pastHero;
+    const on = gate && !bandOn;
     dock.classList.toggle('show', on);
     document.documentElement.classList.toggle('dock-on', on);
   };
-  new IntersectionObserver(e => { pastHero = !e[0].isIntersecting; paint(); }).observe(hero);
-  if (band) new IntersectionObserver(e => { bandOn = e[0].isIntersecting; paint(); }).observe(band);
+  const ask = () => { if (!raf) raf = requestAnimationFrame(paint); };
+  new IntersectionObserver(e => { pastHero = !e[0].isIntersecting; ask(); }).observe(hero);
+  if (band) new IntersectionObserver(e => { bandOn = e[0].isIntersecting; ask(); }).observe(band);
+  addEventListener('scroll', ask, {passive: true});
+  addEventListener('resize', ask);
 })();
 
 /* FAQ: opening one question closes the others (fallback for browsers without details[name]) */
@@ -346,21 +354,15 @@ document.querySelectorAll('.faq').forEach((item, _, all) => item.addEventListene
   matchMedia('(min-width: 961px)').addEventListener('change', place);
 })();
 
-/* Phones: the hanging cards move below the strip and become a "Jump to a collection" selector */
+/* The hanging cards sit below the strip as a "Jump to a collection" selector */
 (function () {
   const rack = document.querySelector('.hero-rack'), strip = document.querySelector('.cc-divider');
   if (!rack || !strip) return;
-  const home = rack.parentNode, next = rack.nextSibling;
   const box = document.createElement('div');
   box.className = 'rack-after';
-  box.innerHTML = '<p class="rack-label">Jump to a collection</p>';
-  const phone = matchMedia('(max-width: 760px)');
-  function place() {
-    if (phone.matches) { box.appendChild(rack); if (!box.isConnected) strip.after(box); }
-    else if (rack.parentNode !== home) { home.insertBefore(rack, next); box.remove(); }
-  }
-  place();
-  phone.addEventListener('change', place);
+  box.innerHTML = '<div class="wrap"><p class="rack-label">Jump to a collection</p></div>';
+  box.firstChild.appendChild(rack);
+  strip.after(box);
 })();
 
 /* Block 2: the blueprint scanner */
@@ -479,14 +481,14 @@ document.querySelectorAll('.faq').forEach((item, _, all) => item.addEventListene
 /* Phones: the four hanging cards slide in along the bar from the right as the selector scrolls up.
    They start moving when the bar comes into view and are all in place when it reaches mid-screen. */
 (function () {
-  const phone = matchMedia('(max-width: 760px)'), reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   let raf = 0;
   function update() {
     raf = 0;
     const box = document.querySelector('.rack-after');
     if (!box) return;
     const cards = [...box.querySelectorAll('.hr-list li')].filter(li => li.offsetParent);
-    if (!phone.matches || reduced.matches) { cards.forEach(li => { li.style.translate = ''; }); return; }
+    if (reduced.matches) { cards.forEach(li => { li.style.translate = ''; }); return; }
     const vh = innerHeight, r = box.querySelector('.hero-rack').getBoundingClientRect();
     const start = vh, end = vh / 2 - r.height / 2;
     const p = Math.min(1, Math.max(0, (start - r.top) / (start - end)));
@@ -499,6 +501,25 @@ document.querySelectorAll('.faq').forEach((item, _, all) => item.addEventListene
   const ask = () => { if (!raf) raf = requestAnimationFrame(update); };
   addEventListener('scroll', ask, {passive: true});
   addEventListener('resize', ask);
-  phone.addEventListener('change', ask);
   ask();
+})();
+
+/* Hang tag swing: once when the showcase first comes into view (show() swings it on each change after that) */
+function swingTag() {
+  const sel = document.getElementById('sel');
+  if (!sel) return;
+  sel.classList.remove('swing');
+  void sel.offsetWidth;
+  sel.classList.add('swing');
+}
+(function () {
+  const sel = document.getElementById('sel'), tag = document.getElementById('selCopy');
+  if (!sel || !tag || !('IntersectionObserver' in window)) return;
+  const io = new IntersectionObserver(e => {
+    if (!e[0].isIntersecting) return;
+    sel.dataset.seen = '1';
+    swingTag();
+    io.disconnect();
+  }, {threshold: .5});
+  io.observe(tag);
 })();

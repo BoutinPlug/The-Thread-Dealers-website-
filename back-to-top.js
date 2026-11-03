@@ -16,3 +16,11 @@
   document.addEventListener('click',e=>{if(bar.classList.contains('open')&&!bar.contains(e.target))close()});
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&bar.classList.contains('open')){close();btn.focus()}});
 })();
+
+/* Header height, so each page's opening can end with its strip just above the bottom of the first screen */
+(function(){
+  const bar=document.getElementById('top-bar');
+  if(!bar)return;
+  function set(){document.documentElement.style.setProperty('--hdr',bar.offsetHeight+'px')}
+  set();addEventListener('resize',set);
+})();

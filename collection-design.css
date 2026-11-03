@@ -111,7 +111,6 @@
 .sketch-zoom:hover{border-bottom-color:var(--rust)}
 .collection-page .sel-copy{padding:40px 32px 24px;transform:rotate(-1.5deg);background-color:var(--paper);background-size:18px 18px;transition:transform .4s;max-width:540px}
 .collection-page .sel.sel-switch .sel-copy{animation:none}
-.collection-page .sel-copy:hover{transform:rotate(0deg) translateY(-3px)}
 .collection-page .sel-copy>*{animation:none!important}
 .collection-page .sel-count{padding-left:8px;gap:10px}
 .collection-page .sel-count b{font-size:3.1rem}
@@ -301,7 +300,7 @@
 @keyframes hrDrop{0%{opacity:0;transform:translateY(-120%) rotate(8deg)}45%{opacity:1;transform:translateY(8px) rotate(-7deg)}65%{transform:translateY(-2px) rotate(4deg)}82%{transform:rotate(-2deg)}100%{opacity:1;transform:none}}
 @keyframes hrSway{0%,100%{rotate:0deg}50%{rotate:1.2deg}}
 /* Title tucks up against the cards so rack and title read as one piece */
-.collection-page .col-intro{position:relative;z-index:1;margin-top:14px;animation:hrTitle .8s cubic-bezier(.2,.8,.3,1) 1.25s both}
+.collection-page .col-intro{position:relative;z-index:1;margin-top:14px;animation:hrTitle .6s cubic-bezier(.2,.8,.3,1) .05s both}
 @keyframes hrTitle{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
 @media (max-width:760px){
   .hero-rack{margin-inline:calc(-1 * var(--gl));padding-top:0}
@@ -473,7 +472,6 @@ a.spec-row:hover .spec-pic img{transform:rotate(-8deg) scale(1.12)}
   100%{opacity:1;transform:scale(1) rotate(-6deg);color:transparent}
 }
 .collection-page .sel .sel-copy{background-color:var(--cream);background-image:radial-gradient(rgba(6,38,58,.1) 1px,transparent 1.3px);background-size:16px 16px;border-radius:0;clip-path:polygon(38px 0,100% 0,100% 100%,0 100%,0 38px);box-shadow:0 28px 48px -32px rgba(0,0,0,.85);padding-top:64px;transform:rotate(1.3deg);transform-origin:42px 42px}
-.collection-page .sel .sel-copy:hover{transform:rotate(0deg) translateY(-4px)}
 .collection-page .sel .sel-copy::after{inset:15px;border:2px dashed var(--rust-lite);opacity:.8;clip-path:polygon(26px 0,100% 0,100% 100%,0 100%,0 26px)}
 .collection-page .sel .sx-hole{left:33px;top:33px;width:18px;height:18px;background:var(--stone);box-shadow:0 0 0 3px #B7A576,0 0 0 6px var(--cream)}
 .collection-page .sel .sx-hole::after{display:none}
@@ -493,17 +491,18 @@ a.spec-row:hover .spec-pic img{transform:rotate(-8deg) scale(1.12)}
 }
 @media(prefers-reduced-motion:reduce){.num-armed .collection-page .sel .sel-num{opacity:1}.num-armed .collection-page .sel .sel-num.stamped{animation:none}.collection-page .sel .stage-ring{animation:none}}
 
-/* Desktop: hovering the hang tag sets it swinging from its eyelet, then it settles */
-@media (hover:hover) and (prefers-reduced-motion:no-preference){
-  .collection-page .sel .sel-copy:hover{animation:sel-tag-swing 1.6s cubic-bezier(.35,.05,.35,1) both}
+/* The hang tag swings from its eyelet once when you scroll to it and each time you change collection.
+   It stays still under the pointer so its buttons are easy to click. */
+@media (prefers-reduced-motion:no-preference){
+  .collection-page .sel.swing .sel-copy{animation:sel-tag-swing 1.6s cubic-bezier(.35,.05,.35,1) both}
 }
 @keyframes sel-tag-swing{
-  0%{transform:rotate(1.3deg)}
-  18%{transform:rotate(-3deg)}
-  38%{transform:rotate(2.2deg)}
-  58%{transform:rotate(-1.3deg)}
-  78%{transform:rotate(.7deg)}
-  100%{transform:rotate(0deg)}
+  0%{rotate:0deg}
+  18%{rotate:-4deg}
+  38%{rotate:3deg}
+  58%{rotate:-1.8deg}
+  78%{rotate:.8deg}
+  100%{rotate:0deg}
 }
 
 /* Desktop: the mockup circle takes the room it has */
@@ -551,7 +550,23 @@ a.spec-row:hover .spec-pic img{transform:rotate(-8deg) scale(1.12)}
 
 /* Phones: the opening matches How It Works and Custom Programs. Title first, a slim strip near the
    bottom of the first screen, then the four collections as a hanging selector. */
-.rack-after{display:none}
+/* Below the strip: one card per collection, sliding in from the right as you scroll */
+.rack-after{background:var(--cream);padding:clamp(34px,4vw,52px) 0 clamp(26px,3vw,40px);overflow:hidden}
+.rack-after .rack-label{margin:0 0 10px;font:800 11px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.rack-after .hero-rack{margin:0;padding:0}
+.rack-after .hr-bar{left:0;right:0;top:8px;animation:none}
+.rack-after .hr-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(18px,3vw,44px);overflow:visible;padding:10px 0 16px;counter-reset:col}
+.rack-after .hr-list li{flex:none;counter-increment:col;animation:hrSway 5s ease-in-out infinite;animation-delay:calc(var(--d) * 3)}
+.rack-after .hr-list li:nth-child(2){display:none}
+.rack-after .hr-card b i{font-size:0}
+.rack-after .hr-card b i::after{content:"0" counter(col);font-size:1.05rem}
+@media (min-width:761px){
+  .rack-after .hr-list{max-width:1000px;margin-inline:auto}
+  .rack-after .hr-card{padding:28px 18px 14px}
+  .rack-after .hr-card img{max-height:190px}
+  .rack-after .hr-card b{font-size:1.25rem}
+  .rack-after .hr-card b i::after{font-size:1.25rem}
+}
 @media (max-width:760px){
   .collection-page .col-hero{padding-bottom:0}
   .collection-page .col-hero>.wrap{min-height:485px;box-sizing:border-box}
@@ -562,19 +577,13 @@ a.spec-row:hover .spec-pic img{transform:rotate(-8deg) scale(1.12)}
   .cc-divider{padding:9px 0}
   .cc-marquee span{font-size:.82rem}
 
-  .rack-after{display:block;background:var(--cream);padding:24px 0 12px;overflow:hidden}
-  .rack-after .rack-label{margin:0 var(--gl) 6px;font:800 9.5px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-  .rack-after .hero-rack{margin:0;padding:0 var(--gl)}
-  .rack-after .hr-bar{left:0;right:0;top:8px}
-  /* Four cards, one per collection, all in view: no sideways scroll */
-  .rack-after .hr-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;overflow:visible;padding:10px 0 16px;counter-reset:col}
-  .rack-after .hr-list li{flex:none;counter-increment:col}
-  .rack-after .hr-list li:nth-child(2){display:none}
+  .rack-after{padding:24px 0 12px}
+  .rack-after .rack-label{margin:0 0 6px;font-size:9.5px}
+  .rack-after .hr-list{gap:8px}
   .rack-after .hr-list a:hover,.rack-after .hr-list a:focus-visible{transform:rotate(-3deg) translateY(3px)}
   .rack-after .hr-card{padding:18px 6px 6px}
   .rack-after .hr-card b{font-size:.78rem;margin-top:5px;padding-top:6px}
-  .rack-after .hr-card b i{font-size:0}
-  .rack-after .hr-card b i::after{content:"0" counter(col);font-size:.78rem}
+  .rack-after .hr-card b i::after{font-size:.78rem}
 }
 
 /* Block 1 on phones: mockup and hang tag side by side, like the Custom Programs rows */
@@ -792,27 +801,28 @@ a.spec-row:hover .spec-pic img{transform:rotate(-8deg) scale(1.12)}
 }
 @media (prefers-reduced-motion:reduce){.bp-scan .xr{animation:none;--y:38%}.bp-scan .xr.booting .boot{animation:none}}
 
+/* Block 3 on a light stone background with a rust line, so it separates from the navy scanner above */
+.collection-page .finder{background:#E6DDCD;color:var(--ink);background-image:radial-gradient(rgba(6,38,58,.07) 1px,transparent 1.3px);background-size:22px 22px;border-top:3px solid var(--rust)}
+.collection-page .finder-head .eyebrow{color:var(--rust-ink)!important}
+.collection-page .finder-head .h2{color:var(--ink)}
+.collection-page .finder-head .h2 span{color:var(--rust)!important}
+.collection-page .step-tag{color:var(--muted)}
+.collection-page .step-tag b{border-color:rgba(6,38,58,.3);color:var(--ink)}
+.collection-page .why{background:var(--paper);color:var(--ink);border-color:rgba(6,38,58,.18)}
+.collection-page .why svg{color:var(--rust)!important}
+.collection-page .why:hover{transform:translateY(-2px);border-color:var(--rust)}
+.collection-page .why[aria-pressed="true"]{background:var(--ink);color:var(--cream);border-color:var(--rust);box-shadow:0 0 0 1px var(--rust)}
+.collection-page .why[aria-pressed="true"] svg{color:var(--rust-lite)!important}
+.collection-page .finder-empty{color:var(--muted);border-color:rgba(6,38,58,.25)}
+.collection-page .finder-note{color:var(--muted)}
+.collection-page .finder-note b{color:var(--ink)}
+.collection-page .finder .pick{background:var(--paper);border:1px solid rgba(6,38,58,.14)}
+.collection-page .finder-intro{color:var(--muted)}
+
 /* Phones, round two */
 @media (max-width:760px){
-  /* Block 3 on a light stone background so it separates from the navy scanner above */
-  .collection-page .finder{background:#E6DDCD;color:var(--ink);background-image:radial-gradient(rgba(6,38,58,.07) 1px,transparent 1.3px);background-size:22px 22px;border-top:3px solid var(--rust)}
-  .collection-page .finder-head .eyebrow{color:var(--rust-ink)!important}
-  .collection-page .finder-head .h2{color:var(--ink)}
-  .collection-page .finder-head .h2 span{color:var(--rust)!important}
-  .collection-page .step-tag{color:var(--muted)}
-  .collection-page .step-tag b{border-color:rgba(6,38,58,.3);color:var(--ink)}
   /* The row no longer scrolls sideways, so a lifted button keeps its full outline */
   .collection-page .whys{overflow:visible;margin:0;padding:3px 0 0}
-  .collection-page .why{background:var(--paper);color:var(--ink);border-color:rgba(6,38,58,.18)}
-  .collection-page .why svg{color:var(--rust)!important}
-  .collection-page .why:hover{transform:translateY(-2px);border-color:var(--rust)}
-  .collection-page .why[aria-pressed="true"]{background:var(--ink);color:var(--cream);border-color:var(--rust);box-shadow:0 0 0 1px var(--rust)}
-  .collection-page .why[aria-pressed="true"] svg{color:var(--rust-lite)!important}
-  .collection-page .finder-empty{color:var(--muted);border-color:rgba(6,38,58,.25)}
-  .collection-page .finder-note{color:var(--muted)}
-  .collection-page .finder-note b{color:var(--ink)}
-  .collection-page .finder .pick{background:var(--paper);border:1px solid rgba(6,38,58,.14)}
-
   /* Block 4: compact, everything in one view, the button after the passes */
   .collection-page .sample-first{padding-block:34px 30px}
   .sample-grid{display:flex;flex-direction:column;align-items:stretch;gap:14px}
@@ -829,4 +839,47 @@ a.spec-row:hover .spec-pic img{transform:rotate(-8deg) scale(1.12)}
   .collection-page .sel .stage-disc{inset:2%}
   .collection-page .sel .stage-ring{inset:-3%}
   .collection-page .stage-art .art-img{width:92%}
+}
+
+/* Desktop: the opening fills the first screen and ends with the strip, a little above the bottom.
+   Same strip height and position on Core Collection, How It Works and Custom Programs. */
+@media(min-width:761px){
+  :root{--first:calc(100svh - var(--hdr,77px) - 47px - 28px)}
+  .collection-page .col-hero{padding-block:0}
+  .collection-page .col-hero>.wrap{min-height:var(--first);box-sizing:border-box;display:flex;flex-direction:column;padding-block:26px 28px}
+  .collection-page .col-intro{flex:1;align-content:center;padding-bottom:0}
+  .cc-divider{box-sizing:border-box;height:47px;padding:0;display:flex;align-items:center}
+}
+
+/* Boarding passes: the same orange as the buttons, and real half-circle notches cut out of the ticket */
+.pass{--nx:150px;--nr:9px;box-shadow:none;
+  -webkit-mask:radial-gradient(circle var(--nr) at calc(100% - var(--nx)) 0,#0000 97%,#000) top/100% 51% no-repeat,radial-gradient(circle var(--nr) at calc(100% - var(--nx)) 100%,#0000 97%,#000) bottom/100% 51% no-repeat;
+  mask:radial-gradient(circle var(--nr) at calc(100% - var(--nx)) 0,#0000 97%,#000) top/100% 51% no-repeat,radial-gradient(circle var(--nr) at calc(100% - var(--nx)) 100%,#0000 97%,#000) bottom/100% 51% no-repeat}
+.pass::before,.pass::after{display:none}
+.sample-tickets{filter:drop-shadow(0 10px 9px rgba(3,26,43,.2))}
+.pass-k{color:var(--rust)}
+.pass.free .pass-k,.pass.free .pass-stub{color:var(--rust)}
+.pass-stamp{color:var(--rust);border-color:var(--rust)}
+@keyframes pass-stamp{0%{opacity:0;transform:rotate(-12deg) scale(2.4)}60%{opacity:1;transform:rotate(-12deg) scale(.92)}100%{opacity:1;transform:rotate(-12deg) scale(1)}}
+@media (prefers-reduced-motion:reduce){.pass-stamp{opacity:1}}
+@media (max-width:760px){.pass{--nx:96px;--nr:8px}}
+
+/* Block 2 tiles: the number sits clear of the corner brackets */
+.bp-tile b{margin:4px 0 0 8px}
+/* Phones: block 2 fits one screen under the header, every detail kept */
+@media (max-width:760px){
+  .bp-scan{padding-block:22px 20px}
+  .bp-head{margin-bottom:12px}
+  .bp-scan .lead{margin-top:8px}
+  .bp-grid{gap:10px}
+  .bp-scanner{padding:10px 12px 12px}
+  .bp-frame{height:168px}
+  .bp-scan .xr img{max-height:138px}
+  .bp-id{margin:10px 0 8px;padding-bottom:8px}
+  .bp-specs{gap:6px}
+  .bp-go{margin-top:10px}
+  .bp-tile{padding:6px 5px 7px}
+  .bp-tile b{margin:5px 0 0 9px}
+  .bp-tile img{width:62%;margin:-2px 0 2px}
+  .bp-foot{margin-top:10px;gap:6px}
 }
