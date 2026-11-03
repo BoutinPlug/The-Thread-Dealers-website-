@@ -3,3 +3,10 @@
 .to-top svg{width:20px;height:20px}.to-top.show{opacity:1;transform:none;pointer-events:auto}.to-top:hover{background:var(--ink,#06263a)}
 @media(max-width:640px){.to-top{width:44px;height:44px}}
 @media(prefers-reduced-motion:reduce){.to-top{transition:none}}
+
+/* Phone menu: Start a Project matches the header button */
+@media (max-width:860px){
+  .top.open .nav .nav-cta{margin-top:18px}
+  .top.open .nav .nav-cta a{display:flex;justify-content:center;align-items:center;background:var(--rust);color:var(--cream);border:0;border-radius:2px;padding:17px 22px;font:800 13.5px/1 var(--body);letter-spacing:.08em;text-transform:uppercase;text-decoration:none;transition:background .2s}
+  .top.open .nav .nav-cta a:hover{background:var(--rust-ink)}
+}
