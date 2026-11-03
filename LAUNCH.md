@@ -49,6 +49,12 @@ logo status, notes, and which page it came from. Spam bots are filtered by a hid
 
 ## 4. After it is live
 
+- **Switch the form emails to info@thethreaddealers.com.** Right now they go to the Netlify
+  sign-in email (set up 2026-11-03, because the free plan only emails team members).
+  1. Netlify **User settings** → change the login email to `info@thethreaddealers.com`
+     and confirm it from that inbox.
+  2. **Forms → Submission notifications → Options → Edit** → change the email to
+     `info@thethreaddealers.com` → Save.
 - Send one more test brief from the real domain.
 - Turn off GitHub Pages so there is only one copy of the site:
   GitHub repo → **Settings → Pages → Unpublish site**.
