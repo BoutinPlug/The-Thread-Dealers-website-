@@ -27,6 +27,8 @@
   {"@type":"Offer","itemOffered":{"@type":"Product","name":"Custom performance shirts and jerseys","url":"https://thethreaddealers.com/performance-jerseys.html"}},
   {"@type":"Offer","itemOffered":{"@type":"Product","name":"Custom hats","url":"https://thethreaddealers.com/custom-hats.html"}}]}}]}</script>
 
+<script>/* Phone logo stays hidden until it is sized and placed */
+(function(){var h=document.documentElement;h.classList.add('logo-wait');setTimeout(function(){h.classList.remove('logo-wait')},2500)})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap">
@@ -637,6 +639,8 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:12px}
   .hero-foot{padding-top:28px}
   .hero .mega{line-height:.9}
   .hero-line{font-size:min(5.6vw,1.6rem)}
+  .hero .mega-wrap{transition:opacity .2s}
+  .logo-wait .hero .mega-wrap{opacity:0;transition:none}
 }
 .hero .hero-more{opacity:0;transform:translateY(18px);transition:opacity .6s,transform .7s cubic-bezier(.2,.8,.3,1)}
 .hero .hero-more.shown{opacity:1;transform:none}
@@ -1141,7 +1145,7 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:12px}
   /* Scroll world */
   var topPct=$('#topPct'), railNum=$('#railNum'), railFill=$('#railFill'), railLabel=$('#railLabel');
   var chapters=$$('[data-chapter]'), navLinks=$$('#site-nav a');
-  var megaWrap=$('.mega-wrap'), orbits=$$('[data-orbit]');
+  var megaWrap=$('.mega-wrap'), orbits=$$('[data-orbit]'), heroPeak=scrollY, heroSettled=false;
   var spiral=$('#collection'), scene=$('#scene'), world=$('#world'), cards=$$('.card',world);
   var titlePanel=$('#titlePanel'), titleHome=titlePanel.parentNode, titleNext=titlePanel.nextSibling;
   var hud=$('#hud'), ticks=$$('#hudTicks i'), qpanel=$('#qpanel'), hint=$('#scrollHint');
@@ -1449,6 +1453,14 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:12px}
     if(LITE&&three){var off=sr.bottom<-40||sr.top>vh+40; if(off!==spiral.classList.contains('off')){spiral.classList.toggle('off',off); if(!off){lastActive=-2;kick(true)}}}
     if(root.classList.contains('motion')){
       var hp=clamp(scrollY/(vh*.95),0,1);
+      /* Phones: the logo tilts on the way down, then settles once you scroll back up, until you return to the top */
+      if(root.clientWidth<761){
+        var hy=scrollY;
+        if(hy>heroPeak)heroPeak=hy;
+        if(hy<=8){heroSettled=false;heroPeak=hy}else if(hy<heroPeak-12)heroSettled=true;
+        if(!heroSettled&&hy>8)megaWrap.style.transition='';
+        if(heroSettled){megaWrap.style.transition=hp<1?'transform .35s ease-out':'';hp=0}
+      }
       megaWrap.style.transform='translateX('+(-hp*6).toFixed(2)+'%) rotate('+(-6-hp*12).toFixed(2)+'deg)';
       for(var o=0;o<orbits.length;o++){
         var el=orbits[o], r=el.getBoundingClientRect(), op2=ease(map(vh-r.top,0,vh*.55));
@@ -1579,11 +1591,15 @@ fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:12px}
 (function(){var t=document.querySelector('.hero-first .hero-title'),g=document.querySelector('.hero .mega'),w=document.querySelector('.hero .mega-wrap');if(!t||!g)return;
 var p=document.getElementById('threadPath'),sv=w.querySelector('.thread'),ph=matchMedia('(max-width:760px)');
 if(ph.matches&&p.dataset.dPhone)p.setAttribute('d',p.dataset.dPhone);
-function fit(){g.style.fontSize='40px';g.style.marginLeft='';var cs=getComputedStyle(t),h=t.clientHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom),cw=t.clientWidth,r=w.getBoundingClientRect(),wd=r.width;
-if(ph.matches){var pr=p.getBoundingClientRect(),u=sv.getBoundingClientRect().width/1600;wd=Math.max(r.right,pr.right+140*u)-Math.min(r.left,pr.left);cw=innerWidth-24}
+function fit(){var tf=w.style.transform;w.style.transform='';g.style.fontSize='40px';g.style.marginLeft='';var cs=getComputedStyle(t),h=t.clientHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom),cw=t.clientWidth,r=w.getBoundingClientRect(),wd=r.width;
+if(ph.matches){var pr=p.getBoundingClientRect(),u=sv.getBoundingClientRect().width/1600;wd=Math.max(r.right,pr.right+140*u)-Math.min(r.left,pr.left);cw=document.documentElement.clientWidth-24}
 var fs=Math.min(h/(r.height/40),cw*(ph.matches?1:.92)/(wd/40),320);g.style.fontSize=Math.max(fs,48)+'px';
-if(ph.matches){var a=w.getBoundingClientRect(),b=p.getBoundingClientRect(),L=Math.min(a.left,b.left);g.style.marginLeft=(12-L)+'px'}}
-fit();addEventListener('resize',fit);addEventListener('load',fit);document.fonts&&document.fonts.ready.then(fit)})();</script>
+if(ph.matches){var a=w.getBoundingClientRect(),b=p.getBoundingClientRect(),L=Math.min(a.left,b.left);g.style.marginLeft=(12-L)+'px'}w.style.transform=tf}
+/* Phone address bars fire resize while scrolling; only a new width needs a refit */
+var lw=document.documentElement.clientWidth;function onResize(){var cw=document.documentElement.clientWidth;if(ph.matches&&cw===lw)return;lw=cw;fit()}
+function show(){fit();document.documentElement.classList.remove('logo-wait')}
+fit();addEventListener('resize',onResize);addEventListener('load',fit);
+if(document.fonts){var fl=document.fonts.load('900 40px "Barlow Condensed"').catch(function(){});fl.then(fit);document.fonts.ready.then(fit);Promise.race([fl,new Promise(function(r){setTimeout(r,1500)})]).then(show)}else show()})();</script>
 <script>(function(){var m=document.querySelectorAll('.hero-more');function u(){var on=scrollY>30;m.forEach(function(e){e.classList.toggle('shown',on)})}addEventListener('scroll',u,{passive:true});u()})();</script>
 <script src="signature-animation.js" defer></script>
 </body>

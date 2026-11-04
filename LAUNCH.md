@@ -66,7 +66,24 @@ logo status, notes, and which page it came from. Spam bots are filtered by a hid
      and confirm it from that inbox.
   2. **Forms → Submission notifications → Options → Edit** → change the email to
      `info@thethreaddealers.com` → Save.
+- Send the link to yourself on WhatsApp and check the share image shows.
 - Send one more test brief from the real domain.
 - Turn off GitHub Pages so there is only one copy of the site:
   GitHub repo → **Settings → Pages → Unpublish site**.
-- Optional: add the site to Google Search Console and submit `sitemap.xml`.
+## 5. SEO and getting found on Google (after launch)
+
+- [ ] **Google Search Console:** add `thethreaddealers.com`, verify it (a DNS record), submit
+      `sitemap.xml`, then request indexing for the homepage and key pages.
+- [ ] **Google Business Profile:** create or claim it (Toronto / Concord address, phone, hours,
+      website link, photos). This is what shows in Google Maps and local searches.
+- [ ] **Keyword review:** pick the searches to target (for example "custom hoodies Toronto",
+      "custom team jerseys Canada", "custom apparel 50 minimum") and check every page title,
+      description and heading against them.
+- [ ] **Page speed and Core Web Vitals:** run PageSpeed Insights on phone and desktop and fix
+      anything it flags.
+- [ ] **Structured data check:** run the Rich Results Test on the homepage and product pages.
+- [ ] **Image descriptions (alt text)** on every product image.
+- [ ] **Links in:** list the site on Instagram, LinkedIn, local directories and supplier or
+      partner pages.
+- [ ] **Bing Webmaster Tools:** import from Search Console (two minutes).
+- [ ] After 2–4 weeks, check Search Console for what people search to find the site and adjust.
