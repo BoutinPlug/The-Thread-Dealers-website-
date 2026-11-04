@@ -33,7 +33,7 @@
     const css=document.createElement('style');
     css.id='consent-css';
     css.textContent=
-      '.consent{position:fixed;left:16px;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:200;max-width:430px;padding:18px;border-radius:6px;background:var(--ink,#06263A);color:var(--cream,#F4EBDD);font:500 14px/1.5 var(--body,"Manrope",system-ui,sans-serif);box-shadow:0 14px 36px rgba(3,26,43,.35)}'+
+      '.consent{position:fixed;left:16px;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:200;max-width:430px;margin-left:auto;padding:18px;border-radius:6px;background:var(--ink,#06263A);color:var(--cream,#F4EBDD);font:500 14px/1.5 var(--body,"Manrope",system-ui,sans-serif);box-shadow:0 14px 36px rgba(3,26,43,.35)}'+
       '.consent p{margin:0 0 14px;color:inherit;font:inherit}'+
       '.consent a{color:inherit;font-weight:700;text-decoration:underline}'+
       '.consent-row{display:flex;gap:10px}'+
